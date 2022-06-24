@@ -7,10 +7,10 @@ tags:
 - userfunc
 - TYPO3
 - typolink
-permalink: /2022/01/typo3-multiple-dynamic-typolink-parameters.html
 modified_time: '2022-01-20T15:29:42.284+01:00'
 blogger_id: tag:blogger.com,1999:blog-6517038209122183182.post-6637893069431677698
 blogger_orig_url: http://www.derhansen.de/2022/01/typo3-multiple-dynamic-typolink-parameters.html
+permalink: /2022/01/typo3-multiple-dynamic-typolink-parameters.html
 ---
 
 I often use the TYPO3 linkHandler to enable the possibility for editors to create direct links to records from within

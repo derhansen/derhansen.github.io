@@ -7,10 +7,10 @@ tags:
 - multiple
 - TYPO3
 - smtp
-permalink: /2022/01/multiple-smtp-accounts-in-typo3.html
 modified_time: '2022-01-21T15:32:49.102+01:00'
 blogger_id: tag:blogger.com,1999:blog-6517038209122183182.post-4351872335620232499
 blogger_orig_url: http://www.derhansen.de/2022/01/multiple-smtp-accounts-in-typo3.html
+permalink: /2022/01/multiple-smtp-accounts-in-typo3.html
 ---
 
 When TYPO3 is used to serve multiple websites in one installation, it may sometimes be required to configure multiple SMTP accounts in order to send emails from TYPO3 (e.g. mailforms or notifications) to different recipients. This may especially be important, when the recipient mailserver has a **strict spam filter** or when the domain uses a **SPF, DKIM or DMARC** and the mailserver only accepts emails from thrusted sources.

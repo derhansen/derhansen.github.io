@@ -9,10 +9,10 @@ tags:
 - StandaloneView
 - CLI
 - Symfony Console
-permalink: /2022/06/using-typo3-fluidemail-in-cli-context.html
 modified_time: '2022-06-23T10:17:21.663+02:00'
 blogger_id: tag:blogger.com,1999:blog-6517038209122183182.post-4609028560548194137
 blogger_orig_url: http://www.derhansen.de/2022/06/using-typo3-fluidemail-in-cli-context.html
+permalink: /2022/06/using-typo3-fluidemail-in-cli-context.html
 ---
 Since TYPO3 10.4 it is possible to use `TYPO3\CMS\Core\Mail\FluidEmail` to send emails with body content rendered
 by Fluid. This all works fine as long as you work in frontend or backend context, but when you use FluidEmail in CLI
