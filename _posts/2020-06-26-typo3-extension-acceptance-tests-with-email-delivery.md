@@ -50,7 +50,7 @@ GitHub Actions supports [docker based service containers](https://help.github.co
 and MailHog is also available as docker container, so in order to execute my Acceptance testsuite I added MailHog as
 service container to my CI setup as shown below:
 
-{% highlight php %}
+{% highlight yaml %}
 jobs:
   build:
     runs-on: ubuntu-18.04
