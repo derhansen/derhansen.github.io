@@ -31,7 +31,7 @@ an [extending extension](https://github.com/derhansen/sf_event_mgt_extend_demo) 
 In order to allow the new field as sorting field, the field "slot" needs to be added to the allowed ordering fields
 using TypoScript (note, this step is only specific to the extension sf\_event\_mgt).
 
-{% highlight sql %}
+{% highlight php %}
 plugin.tx_sfeventmgt {
   settings {
     orderFieldAllowed = uid,title,startdate,enddate,slot
@@ -42,7 +42,7 @@ plugin.tx_sfeventmgt {
 Finally the FlexForm of the plugin needs to be extended, so the new field appears in the "Sort by" select field. In
 order to do so, the following Page TSconfig has been added:
 
-{% highlight sql %}
+{% highlight php %}
 TCEFORM.tt_content.pi_flexform.sfeventmgt_pievent.sDEF.settings\.orderField {
   addItems.slot = slot
   altLabels.slot = Slot
