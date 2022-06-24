@@ -11,14 +11,19 @@
 			<br>
 			{{ site.author.bio }}
 			<br>
-			<div class="mode" id="mode-switcher" onclick="toggleNightMode();">
-				<span></span>
+			<div>
+				<a href="{{ site.url }}/" class="top-link">Home</a>
+				<a href="{{ site.url }}/archive/" class="top-link">Archive</a>
+				<a href="{{ site.url }}/tags/" class="top-link">Tags</a>
+				<div class="mode" id="mode-switcher" onclick="toggleNightMode();">
+					<span></span>
+				</div>
 			</div>
 		</div>
 	</div>
 	{{ content }}
 	<div class="footer">
-		<span>Made with <font color="red">♥</font> by <a href="https://www.derhansen.com"><b>Torben Hansen</b></a></span>
+		<span>Made with <font color="red">♥</font> by <a href="https://www.derhansen.com"><b>Torben Hansen</b></a> - <a href="{{ site.url }}/legal/">Legal information and contact</a></span>
 	</div>
 </div>
 {% include footer.html %}

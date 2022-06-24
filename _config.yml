@@ -59,7 +59,7 @@ collections:
   posts:
     output: true
     permalink: /:slug
-  
+
 defaults:
   -
     scope:
