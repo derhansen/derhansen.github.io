@@ -48,6 +48,7 @@ if (($_SERVER['SERVER_NAME'] ?? '') === 'typo3-website2.tld') {
 }
 {% endhighlight %}
 
-Since AdditionalConfiguration.php is evaluated on every request, TYPO3 will conditionally use the email settings depending on the _$\_SERVER\['SERVER\_NAME'\]_ variable.
+Since AdditionalConfiguration.php is evaluated on every request, TYPO3 will conditionally use the email settings
+depending on the `$_SERVER['SERVER_NAME']` variable.
 
 **Note**, that this solution only applies to web requests and **does not work in CLI context** (e.g. scheduler task).
