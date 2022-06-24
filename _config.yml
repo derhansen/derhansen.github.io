@@ -32,6 +32,9 @@ kramdown:
   input: GFM
   syntax_highlighter: rouge
 
+webrick:
+  headers:
+    Access-Control-Allow-Origin: "*"
 
 exclude:
   - .jekyll-cache
