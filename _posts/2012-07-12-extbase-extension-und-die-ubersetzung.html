@@ -1,0 +1,17 @@
+---
+layout: post
+title: Extbase Extension und die Übersetzung von Datensätzen im Backend
+date: '2012-07-12T12:57:00.000+02:00'
+author: Torben Hansen
+tags:
+- Extbase
+- TYPO3
+- Übersetzung
+modified_time: '2012-07-13T16:12:22.652+02:00'
+thumbnail: http://1.bp.blogspot.com/-N4ecQ4HHwSg/T_1spasaO1I/AAAAAAAABLs/kJ39bGPSfZk/s72-c/extbase_localization.jpg
+blogger_id: tag:blogger.com,1999:blog-6517038209122183182.post-8179438394651631639
+blogger_orig_url: http://www.derhansen.de/2012/07/extbase-extension-und-die-ubersetzung.html
+permalink: /2012/07/extbase-extension-und-die-ubersetzung.html
+---
+
+In fast jeder TYPO3 Extension müssen in irgendeiner Art und Weise Relationen abgebildet werden. Nehmen wir z.B. an, man hat eine Tabelle mit Artikeln und eine Tabelle mit Kategorien. Per n:m Relation möchte man einen Artikel mehreren Kategorien zuordnen. Das alles ist Standard und lässt sich mit dem ExtensionBuilder recht einfach konfigurieren. Mehrsprachigkeit ist im Prinzip auch kein Problem und funktioniert out-of-the-box im Frontend, <b>im Backend</b> kann es aber zu etwas Verwirrung für den Redakteur kommen, wenn es um die lokalisierten Datensätze (in diesem Fall die Kategorien) geht.<br /><br />Der ExtensionBuilder sieht bei der Relation nicht vor, dass es sich auch um lokalisierte Datensätze handelt und zeigt jeweils den ursprünglichen Datensatz sowie die dazugehörige Übersetzung an (siehe Bild).<br /><br /><div class="separator" style="clear: both; text-align: center;"><a href="http://1.bp.blogspot.com/-N4ecQ4HHwSg/T_1spasaO1I/AAAAAAAABLs/kJ39bGPSfZk/s1600/extbase_localization.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="http://1.bp.blogspot.com/-N4ecQ4HHwSg/T_1spasaO1I/AAAAAAAABLs/kJ39bGPSfZk/s1600/extbase_localization.jpg" /></a></div><br />Damit hier nur die Datensätze der Default-Sprache angezeigt werden, muss man im TCA für das Relations-Feld eine Zeile hinzufügen.<br /><br /><br /><pre><code><br />'category' =&gt; array(<br /> 'exclude' =&gt; 0,<br /> 'label' =&gt; 'LLL:EXT:tx_testextension/Resources/Private/Language/locallang_db.xlf:tx_testextension_domain_model_article.category',<br /> 'config' =&gt; array(<br />  'type' =&gt; 'select',<br />  'foreign_table' =&gt; 'tx_testextension_domain_model_category',<br />  'foreign_table_where' =&gt; ' AND (tx_testextension_domain_model_category.sys_language_uid = 0 OR tx_testextension_domain_model_category.l10n_parent = 0)',<br />  'minitems' =&gt; 0,<br />  'maxitems' =&gt; 1,<br /> ),<br />),<br /></code></pre><br />Neu hinzugekommen ist die Zeile "foreign_table_where",&nbsp;welche die Selektion der Datensätze auf die Default-Sprache reduziert. Nachdem man die Zeile hinzugefügt hat, werden in der Select-Box im Backend nur noch die Datensätze der Default-Sprache angezeigt.

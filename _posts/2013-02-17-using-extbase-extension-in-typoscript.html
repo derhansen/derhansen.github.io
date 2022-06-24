@@ -1,0 +1,16 @@
+---
+layout: post
+title: Using an Extbase extension in Typoscript
+date: '2013-02-17T14:27:00.000+01:00'
+author: Torben Hansen
+tags:
+- Extbase
+- typoscript
+- TYPO3
+modified_time: '2013-02-17T14:27:42.334+01:00'
+blogger_id: tag:blogger.com,1999:blog-6517038209122183182.post-7109382031266011854
+blogger_orig_url: http://www.derhansen.de/2013/02/using-extbase-extension-in-typoscript.html
+permalink: /2013/02/using-extbase-extension-in-typoscript.html
+---
+
+Using typoscript to insert or configure an Extbase extension is quite easy. I use the following typoscript code to assign an Extbase extension to a typoscript object.<br /><br /><pre><code><br />myObject = USER<br />myObject {<br />     userFunc = tx_extbase_core_bootstrap-&gt;run<br />     extensionName = YourExtensionName<br />     pluginName = YourPluginName<br />     switchableControllerActions {<br />       YourControllerName {<br />         1 = youraction<br />       }<br />     }<br />     settings =&lt; plugin.tx_yourextensionname.settings<br />     persistence =&lt; plugin.tx_yourextensionname.persistence<br />     view =&lt; plugin.tx_yourextensionname.view<br />}<br /><br /></code></pre>The first thing to notice is, that the <b>name of your Extension</b> must be in <b>UpperCamelCase</b>. so if your extension key is "your_extension_name", then you have to set it to "YourExtensionName". This also applies to the plugin name.<br /><br />The next thing you have to do is to configure the section <b>switchableControllerActions</b> with the controller- and the action-name you wish to use.<br /><br />Last but not least you should assign the settings, the persistence- and the view-configuration to the typoscript object. Now you`re ready to use your Extbase extension in typoscript.<br /><br />Notice in the example above, that the extension`s typoscript settings are imported to the new typoscript object. With this, you can modify the <b>settings</b> for the typoscript object <b>individually</b>. The same applies to the persistence- and the view-configuration. With this, you are very flexible using your Extbase extension in typoscript.

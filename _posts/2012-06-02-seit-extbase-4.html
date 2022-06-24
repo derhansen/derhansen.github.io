@@ -1,0 +1,17 @@
+---
+layout: post
+title: TYPO3 Scheduler Task mit ExtBase 4.7
+date: '2012-06-02T15:06:00.000+02:00'
+author: Torben Hansen
+tags:
+- Extbase
+- TYPO3
+- Scheduler
+modified_time: '2012-06-02T19:29:47.456+02:00'
+thumbnail: http://2.bp.blogspot.com/-FaZBhNjJ8Tk/T8oCupojdrI/AAAAAAAAAg4/h8xIslQZhSY/s72-c/new-task.png
+blogger_id: tag:blogger.com,1999:blog-6517038209122183182.post-2994149842669110428
+blogger_orig_url: http://www.derhansen.de/2012/06/seit-extbase-4.html
+permalink: /2012/06/seit-extbase-4.html
+---
+
+Seit Extbase 4.7 kann man TYPO3 Scheduler Tasks direkt als Command Controller registrieren. Anbei eine kurze Step-By-Step Anleitung, wie das funktioniert.<br /><br />Als erstes muss man einen CommandController erstellen.<br /><br /><b>Classes/Command/HelloWorldCommandController.php</b><br /><pre><code>/**<br /> * Description of HelloWorldCommandController<br /> */<br />class Tx_HelloWorld_Command_HelloWorldCommandController extends Tx_Extbase_MVC_Controller_CommandController {<br />    <br />    /**<br />     * Simple Hello World Command<br />     * <br />     * @param string $name <br />     * @return void<br />     */<br />    public function HelloWorldCommand($name) {<br />        echo 'Hello ' . $name;<br />    }<br />}<br /></code></pre><br />Danach wird der CommandController registriert.<br /><br /><b>ext_localconf.php</b><br /><pre><code>$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['extbase']['commandControllers'][] = 'Tx_HelloWorld_Command_HelloWorldCommandController';</code></pre><br />Als nächstes erstellt man über den TYPO3 Scheduler einen neuen Task und wählt als Klasse den "Extbase CommandController Task (extbase)"<br /><br /><div class="separator" style="clear: both; text-align: center;"><a href="http://2.bp.blogspot.com/-FaZBhNjJ8Tk/T8oCupojdrI/AAAAAAAAAg4/h8xIslQZhSY/s1600/new-task.png" imageanchor="1" style="clear: left; float: left; margin-bottom: 1em; margin-right: 1em;"><span style="font-family: inherit;"><img border="0" height="256" src="http://2.bp.blogspot.com/-FaZBhNjJ8Tk/T8oCupojdrI/AAAAAAAAAg4/h8xIslQZhSY/s640/new-task.png" width="640" /></span></a></div>Beim CommandController wählt man den HelloWorld CommandController aus und speichert den Task ab. Um die Optionen für den Task einzustellen, muss man den Task wieder öffnen und dann die entsprechenden Optionen ausfüllen.<br /><br /><i><u>Update - 02.06.2012 19:24</u></i><br />Leider gibt es noch einen Bug für denn Fall dass man einen Task ohne Parameter anlegt:<br /><a href="http://forge.typo3.org/issues/37563" target="_blank">http://forge.typo3.org/issues/37563</a><br /><br />Ein Workaround steht im Issue beschrieben.

@@ -1,0 +1,17 @@
+---
+layout: post
+title: TYPO3 Error "Sorry, but an error occurred while connecting to the server."
+  in Extension Manager
+date: '2013-08-07T08:23:00.000+02:00'
+author: Torben Hansen
+tags:
+- Extension Manager
+- Connection Problem
+- TYPO3
+modified_time: '2013-08-07T08:23:26.896+02:00'
+blogger_id: tag:blogger.com,1999:blog-6517038209122183182.post-3791073673742623220
+blogger_orig_url: http://www.derhansen.de/2013/08/typo3-error-sorry-but-error-occurred.html
+permalink: /2013/08/typo3-error-sorry-but-error-occurred.html
+---
+
+After the latest security updates for some TYPO3 extensions I was about to update those extension in a TYPO3 installation. After opening the extension manager, TYPO3 (version 4.7) did show the following error message:<br /><br /><pre>Connection Problem<br />Sorry, but an error occurred while connecting to the server. Please check your network connection.<br /></pre><br />First I thought, there was a problem with some TYPO3 cache files, but after cleaning the typo3temp folder, the problem still occured. I then looked into to Webservers Error log and found the following logentry.<br /><br /><pre>PHP Fatal error:  Cannot unset string offsets in /path/to/typo3/sysext/em/classes/tools/class.tx_em_tools.php on line 382<br /></pre><br />After some research I finally found the solution to the problem, which is the result of a <a href="http://forge.typo3.org/issues/46642" target="_blank">bug</a> in the TYPO3 Extension Manager, which has been fixed for some days ago.<br /><br />I manually opened the file "ext_emconf.php " of every installed TYPO3 extension and checked, that the constraints-array was correct. In my case it was powermail which had a wrong entry in "ext_emconf.php".<br /><br />I had to change:<br /><pre>'conflicts' =&gt; '',<br /></pre>to this:<br /><pre>'conflicts' =&gt; array(),<br /></pre><br />After I fixed the wrong entry, the extension manager worked fine again.

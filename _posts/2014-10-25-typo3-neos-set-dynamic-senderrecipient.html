@@ -1,0 +1,17 @@
+---
+layout: post
+title: TYPO3 Neos - Set a dynamic sender/recipient for a mailform
+date: '2014-10-25T14:19:00.002+02:00'
+author: Torben Hansen
+tags:
+- dynamic sender
+- TYPO3 Neos
+- TYPO3.Form
+- Form
+modified_time: '2014-10-25T14:19:24.405+02:00'
+blogger_id: tag:blogger.com,1999:blog-6517038209122183182.post-4238304402385353007
+blogger_orig_url: http://www.derhansen.de/2014/10/typo3-neos-set-dynamic-senderrecipient.html
+permalink: /2014/10/typo3-neos-set-dynamic-senderrecipient.html
+---
+
+I've been starting using <b>TYPO3 Neos</b> for some weeks now and I am really impressed. In so many places you just see how much high quality work, time, effort and love has been put into the product by the TYPO3 Neos team - <b>thumbs up!</b><br /><br />In one of my first projects I created a simple contact form like shown in the <a href="http://docs.typo3.org/neos/TYPO3NeosDocumentation/IntegratorsCookbook/AddingSimpleContactForm.html" target="_blank">TYPO3 Neos Integrators Cookbook</a>. There was only one thing I had some problem with and this was to set the <b>sender e-mail address</b> of the form <b>dynamically</b>, so the recipient of an e-mail form just can press the "reply" button in the e-mail app to directly send an answer to the person who filled out the contact form.<br /><br />I really could'nt find a solution for my problem on the internet, so after digging into the code of the <b>TYPO3.Form</b> <b>EmailFinisher</b>, I finally found some help in the description of the class. You can use submitted form fields as <b>placeholders</b> for every option of the EmailFinisher like shown below.<br /><br /><pre><code><br />finishers:<br />  -<br />    identifier: 'TYPO3.Form:Email'<br />    options:<br />      templatePathAndFilename: resource://Vendor.Site/Private/Templates/Email/Contact.txt<br />      subject: Contact from website<br />      recipientAddress: office@example.net<br />      recipientName: 'Office of Company'<br />      senderAddress: '{email}'<br />      senderName: '{name}'<br />      format: plaintext<br /></code></pre><br />With this configuration in the Yaml for the contact form, the <b>sender e-mail address</b> and the <b>sender name</b> will be used from the submitted from data. Of course you can also set the recipient e-mail address dynamically the same way.<br /><br />Keep in mind, that setting the sender e-mail address like shown may cause some problems with local <b>spamfilters</b>. To prevent potential problems, you could whitelist the webservers IP address directly in the spamfilter.<br /><br />

@@ -1,0 +1,16 @@
+---
+layout: post
+title: Sichere Userpasswörter für TYPO3
+date: '2012-06-10T19:45:00.000+02:00'
+author: Torben Hansen
+tags:
+- rsaauth
+- TYPO3
+- saltedpasswords
+modified_time: '2012-06-10T19:46:52.340+02:00'
+blogger_id: tag:blogger.com,1999:blog-6517038209122183182.post-6602264063108233828
+blogger_orig_url: http://www.derhansen.de/2012/06/sichere-userpassworter-fur-typo3.html
+permalink: /2012/06/sichere-userpassworter-fur-typo3.html
+---
+
+In den letzten Tagen häufen sich in der Presse <a href="http://www.heise.de/newsticker/meldung/Passwort-Lecks-groesser-als-angenommen-1613946.html" target="_blank">Berichte</a> über Datenlecks bei Anbietern großer Portale wie z.B. LinkedIn, Last.fm oder eHarmony. Besonders erschreckend finde ich die Tatsache, dass solch große Portale die User-Passwörter per MD5 "verschlüsseln".&nbsp;Das ein MD5-Hash alleine alles andere als sicher ist sollte mittlerweile jeder Entwickler wissen, der sich schon mal mit dem Thema Sicherheit beschäftigt hat.<br /><br />Ab TYPO3 4.6 sind deshalb auch die Extensions <b>rsaauth</b> und <b>saltedpasswords</b> per default installiert, damit ein Abgreifen der Userpasswörter nicht gleich zu dem Erfolg führt, dass der Angreifer sich recht simpel die Userpasswörter per Rainbow-Tables zugänglich machen kann. Ohnehin empfehle ich an dieser Stelle jedem TYPO3 Admin, die beiden erwähnten Extensions zu installieren und sowohl für die Backend als auch für die Frontend-Anmeldung zu aktivieren. Somit wären die Userpasswörter dann schon mal deutlich sicherer gegen Angriffe als vorher.<br /><br />Die Extension saltedpasswords sorgt dafür, dass die Userpasswörter nicht mehr als MD5-Hash, sondern als gesalzener Hash in der TYPO3 Datenbank abgespeichert werden. Durch das "salzen" der Passwort-Hashes ergibt ein und dasselbe Passwort nun nicht mehr den gleichen Hash-Wert, wie es z.B. für ungesalzene Passwörter der Fall ist.

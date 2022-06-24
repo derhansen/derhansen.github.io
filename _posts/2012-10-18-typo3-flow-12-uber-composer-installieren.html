@@ -1,0 +1,16 @@
+---
+layout: post
+title: TYPO3 Flow 1.2 - Kickstarter Package über Composer installieren
+date: '2012-10-18T16:58:00.000+02:00'
+author: Torben Hansen
+tags:
+- Composer
+- TYPO3 Flow
+- TYPO3 Kickstarter
+modified_time: '2012-10-18T17:03:16.124+02:00'
+blogger_id: tag:blogger.com,1999:blog-6517038209122183182.post-471328838340709961
+blogger_orig_url: http://www.derhansen.de/2012/10/typo3-flow-12-uber-composer-installieren.html
+permalink: /2012/10/typo3-flow-12-uber-composer-installieren.html
+---
+
+Heute wollte ich mal die aktuelle Developer Version von TYPO3 Flow 1.2 installieren nachdem ich ein Tweet von Robert Lemke über TYPO3 flow und Composer gelesen hatte. Da mir Composer nicht nicht sehr geläufig ist, habe ich etwas länger gebraucht um das alles zum laufen zu bekommen.<br /><br />Die Installation von TYPO3 Flow über Composer ist wirklich sehr einfach und mit einem simplen Befehl erhält man (fast) alle benötigten Dateien und Abhängigkeiten<br /><br /><pre>composer create-project typo3/flow-base-distribution<br /></pre><br />Wer nun erwartet, dass man wie in Flow 1.1 einfach mit dem Kickstarter loslegen und Packages erstellen kann, der wird &nbsp;feststellen, dass der TYPO3 Kickstarter gar nicht in der flow-base-distribution enthalten ist.<br /><br />Nachdem ich dann etwas in der composer.json Datei reingeschaut hatte, fiel mir die Zeile "require-dev" auf. Dort stand unter anderem etwas vom TYPO3 Kickstarter. Die dort erwähnten Pakete installiert man mit folgendem Befehl:<br /><br /><pre>composer install --dev<br /></pre><br />Nun kann man mit dem TYPO3 Kickstarter neue Packages erstellen.

@@ -1,0 +1,17 @@
+---
+layout: post
+title: 'MySQL errno: 24 after upgrade from Debian Squeeze to Wheezy'
+date: '2013-10-28T10:08:00.000+01:00'
+author: Torben Hansen
+tags:
+- Debian Wheezy
+- MySQL
+- Debian Squeeze
+- 'errno: 24'
+modified_time: '2013-10-28T10:08:01.100+01:00'
+blogger_id: tag:blogger.com,1999:blog-6517038209122183182.post-5422342943989369580
+blogger_orig_url: http://www.derhansen.de/2013/10/mysql-errno-24-after-upgrade-from.html
+permalink: /2013/10/mysql-errno-24-after-upgrade-from.html
+---
+
+Today I upgraded one of my <b>Debian Squeeze</b> servers to <b>Debian Wheezy</b>. During the upgrade, <b>MySQL </b>came up with some error messages like shown below:<br /><pre><code><br />[ERROR] /usr/sbin/mysqld: Can't open file: './database/table1.frm' (errno: 24)<br />[ERROR] /usr/sbin/mysqld: Can't open file: './database/table2.frm' (errno: 24)<br />[ERROR] /usr/sbin/mysqld: Can't open file: './database/table3.frm' (errno: 24)<br />[ERROR] /usr/sbin/mysqld: Can't open file: './database/table4.frm' (errno: 24)<br /></code></pre><br />After some research I found out, that the cause of the problem could be, that the mysql process has too many open files. I then added the following to the my.cnf and restarted the mysql service.<br /><pre><code><br />[mysqld]<br />open_files_limit = 10000<br /></code></pre><br />You may adjust the limit to a value of your choice. The default limit for Debian systems is 1024, so I would recommend to set this the limit to a value greater than 1024.<br /><br />After adjusting the open files limit, the mysql server was running fine again.

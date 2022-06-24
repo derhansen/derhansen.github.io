@@ -1,0 +1,16 @@
+---
+layout: post
+title: FlashMessages in TYPO3 Flow überschreiben
+date: '2012-10-29T11:04:00.002+01:00'
+author: Torben Hansen
+tags:
+- FlashMassage
+- override
+- TYPO3 Flow
+modified_time: '2012-10-29T11:04:55.172+01:00'
+blogger_id: tag:blogger.com,1999:blog-6517038209122183182.post-361238635983410837
+blogger_orig_url: http://www.derhansen.de/2012/10/override-flashmessages-in-typo3-flow.html.html
+permalink: /2012/10/override-flashmessages-in-typo3-flow.html.html
+---
+
+In TYPO3 Flow kann man Domain-Models sehr einfach per Annotations validieren. So definiert man in seinem Domain Model lediglich die Eigenschaften und die dazugehörigen Validierungsregeln. Will man nun über ein Formular Daten speichern, gibt TYPO3 Flow wie erwartet Fehlermeldungen passend zu den definierten Validierungsregeln aus.<br /><br />Beispiel:<br /><pre><code><br />/**<br /> * The firstname<br /> *<br /> * @var string<br /> * @Flow\Validate(type="String")<br /> * @Flow\Validate(type="NotEmpty")<br /> */<br /> protected $firstname;<br /></code></pre><br />Die Eigenschaft "firstname" muss ein String und darf nicht leer sein. Erstellt man dafür nun ein Formular, würde das so aussehen.<br /><br /><pre><code>&lt;f:form action="create" controller="Register"&gt;<br />  &lt;label for="firstname"&gt;Firstname:&lt;/label&gt;<br />  &lt;f:form.textfield=" id="firstname" name="data[firstname]" property="firstname" /&gt;<br />  &lt;f:form.submit value="Submit" /&gt;<br />&lt;/f:form&gt;<br /></code></pre><pre><code><br /></code></pre>Um die Validierungsergebnisse auszugeben, muss das Formular wie folgt ergänzt werden. <br /><pre><code><br />&lt;f:flashMessages /&gt;<br />&lt;f:form.validationResults for="data"&gt;<br />    &lt;f:if condition="{validationResults.flattenedErrors}"&gt;<br />        &lt;div class="error"&gt;<br />            &lt;f:for each="{validationResults.flattenedErrors}" key="propertyPath" as="errors"&gt;{propertyPath}: &lt;f:for each="{errors}" as="error"&gt;{error}&lt;/f:for&gt;&lt;/f:for&gt;<br />        &lt;/div&gt;<br />    &lt;/f:if&gt;<br />&lt;/f:form.validationResults&gt;<br /></code></pre><br />Wenn man die das Formular nun absendet, erhält man in den validationResults die Meldungen bzgl. des Domain-Models. Aber im flashMessage Container erscheint noch eine nicht sehr schöne Fehlermeldung von TYPO3 Flow. <br /><pre>An error occurred while trying to call Your\Package\Controller\RegisterController-&gt;createAction()<br /></pre><br />Diese Meldung kann man überschreiben, indem man im Controller die Methode&nbsp;getErrorFlashMessage() überschreibt.<br /><pre><code><br />/**<br /> * @return \TYPO3\Flow\Error\Message<br /> */<br />protected function getErrorFlashMessage() {<br /> switch ($this-&gt;actionMethodName) {<br />  case 'createAction' :<br />   return new \TYPO3\Flow\Error\Message('Could not save form, because some fields are not filled out correctly');<br />  default:<br />   return parent::getErrorFlashMessage();<br /> }<br />}<br /></code></pre><br />Abhängig von der aufgerufenen Action, kann man die ausgegebene Fehlermeldung überschreiben.

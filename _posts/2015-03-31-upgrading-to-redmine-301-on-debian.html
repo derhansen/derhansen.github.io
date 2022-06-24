@@ -1,0 +1,16 @@
+---
+layout: post
+title: Upgrading to Redmine 3.0.1 on Debian Wheezy
+date: '2015-03-31T11:09:00.000+02:00'
+author: Torben Hansen
+tags:
+- Debian Wheezy
+- phusion passenger
+- redmine 3.0
+modified_time: '2015-03-31T11:09:01.534+02:00'
+blogger_id: tag:blogger.com,1999:blog-6517038209122183182.post-6230429445931720064
+blogger_orig_url: http://www.derhansen.de/2015/03/upgrading-to-redmine-301-on-debian.html
+permalink: /2015/03/upgrading-to-redmine-301-on-debian.html
+---
+
+Today I wanted to upgrade my Redmine installation from <b>Redmine 2.6.x</b> to the new version <b>Redmine 3.0.1</b>. Since I already have processed many Redmine updates I thought this update would be easy as always, but certainly I ran into an unexpected problem. After I followed all steps from the <a href="http://www.redmine.org/projects/redmine/wiki/RedmineUpgrade" target="_blank">upgrade manual</a>&nbsp;I restarted the apache2 process, so <b>mod_passenger </b>reloads the Redmine application. After that, Redmine did'nt start and showed the following error message:<br /><pre><code><br />undefined method `page_cache_directory' for ActionController::Base:Class<br /></code></pre><br />After doing some Google search, I found this <a href="http://stackoverflow.com/questions/21531485/phusionpassengerclassicrailsapplicationspawner-undefined-method-page-cache" target="_blank">article</a> on stackoverflow, which pointed me to the right direction. Actually, Debian Wheezy comes with an pretty <b>old version of Phusion Passenger (3.0.x)</b>, so I performed the following steps and installed a newer version (4.0.x) of Phusion Passenger from Wheezy Backports.<br /><br />First I added Wheezy Backports to my apt sources file /etc/apt/sources.list<br /><pre><code>deb http://http.debian.net/debian wheezy-backports main</code></pre><br />Next I used <b>apt-get update</b> to update the local apt repositories and finally I installed Phusion Passenger from the Wheezy Backports with the following command<br /><pre><code><br />apt-get -t wheezy-backports install "libapache2-mod-passenger"<br /></code></pre><br />After this, I restarted the apache2 process and Redmine 3.0.1 started successfully.

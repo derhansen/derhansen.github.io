@@ -1,0 +1,17 @@
+---
+layout: post
+title: TYPO3 Extension "Plain FAQ" released
+date: '2019-11-22T15:15:00.000+01:00'
+author: Torben Hansen
+tags:
+- FAQ
+- irfaq
+- TYPO3
+- Symfony Console
+modified_time: '2019-11-22T15:15:30.371+01:00'
+blogger_id: tag:blogger.com,1999:blog-6517038209122183182.post-849607586137241027
+blogger_orig_url: http://www.derhansen.de/2019/11/typo3-extension-plain-faq-released.html
+permalink: /2019/11/typo3-extension-plain-faq-released.html
+---
+
+Today I released the first <a href="https://extensions.typo3.org/extension/plain_faq" target="_blank">public version</a> of my latest TYPO3 Extension called "Plain FAQ". The name already says it - the extension is a very simple solution to manage Frequently Asked Questions in TYPO3. Below follow some of the facts about the Extension:<br /><ul><li>Compatible with TYPO3 8.7 and 9.5</li><li>Based on Extbase and Fluid</li><li>Covered with unit and functional tests</li><li>Easy usage for editors</li><li>Uses TYPO3 system categories to structure FAQs by category</li><li>Field for media and files</li><li>Possibility to add related FAQs</li><li>Configurable template layouts for the views</li><li>Automatic cache cleanup when a FAQ article has been updated in backend</li><li>Signal slots to extend the extension with own functionality</li><li>Symfony Console commands to migrate from ext:irfaq</li></ul><div>The extension is available on <a href="https://extensions.typo3.org/extension/plain_faq" target="_blank">TER</a> and <a href="https://packagist.org/packages/derhansen/plain-faq" target="_blank">packagist</a>.<br /><br /></div><h3>Migration from "Modern FAQ (irfaq)"</h3><div><div>If you currently use the TYPO3 Extension&nbsp;"Modern FAQ (irfaq)" you may have noticed, that the extension is not compatible to TYPO3 9.5 (last Extension-Update in March 2018)&nbsp; and the architecture is quite old (AbstractPlugin, Marker Based Templates and TypoScript configuration for wraps).&nbsp;</div><div><br /></div></div><div>For users where "Modern FAQ (irfaq)" is a blocker for an upcoming TYPO3 9.5 Update, it is possible to migrate to "Plain FAQ" using the Symfony Console Commands included in "Plain FAQ". The migration is as easy as the usage of the extension:</div><div><br /></div><div>1. Migrate existing Categories to sys_category</div><div>2. Migrate existing FAQs to "plain_faq" records</div><div>3. Migrate existing Plugins including Plugin settings</div><div><br /></div><div>The migration may not cover all possible scenarios (e.g. Ratings, Question asked by, irfaq Plugin settings set by TypoScript), but is for sure a good starting point in order to migrate existing records. I guess, for most websites the included migration will suite without further work on migrated data.</div><div><br /></div><div>You can find details about the migration process in the Extension Manual.</div><div><br /></div><h3>Thanks for sponsoring</h3><div><br /></div><div>I would like to thank&nbsp;<a href="https://www.uni-wuerzburg.de/" target="_blank">Julius-Maximilians-Universität Würzburg</a> for sponsoring the initial development of the TYPO3 extension.&nbsp;Thanks for supporting TYPO3 and open source software!</div><div><br /></div><div><br /></div><div><br /></div><div><br /></div><div><br /></div><div><br /></div><div><br /></div>

@@ -1,0 +1,16 @@
+---
+layout: post
+title: Selenium tests on a Windows 8.1 machine with Internet Explorer 11
+date: '2013-12-02T09:13:00.000+01:00'
+author: Torben Hansen
+tags:
+- Selenium
+- Windows 8.1
+- Internet Explorer 11
+modified_time: '2013-12-02T09:13:57.528+01:00'
+blogger_id: tag:blogger.com,1999:blog-6517038209122183182.post-201710475704531034
+blogger_orig_url: http://www.derhansen.de/2013/12/selenium-tests-on-windows-81-machine.html
+permalink: /2013/12/selenium-tests-on-windows-81-machine.html
+---
+
+Today I tried to add an <b>Windows 8.1</b> machine to my <b>Selenium Grid</b> and ran into some strange problems. I installed a new Windows 8.1 (32 bit) machine as a selenium node for my selenium grid. After the installation of Windows 8.1 was completed, I configured all browsers (Internet Explorer, Chrome, Firefox and Opera) and the necessary Webdrivers on the machine. Then I connected the machine to the Selenium grid and started some tests. everything seemed to run fine until I started the tests on <b>Internet Explorer 11</b>.<br /><br />When running the tests, the <i>browser window opened</i> the requested URL as expected but then nothing more happened. The window <i>did'nt even close</i> after the test, so there must be something wrong. In the Selenium log on the machine I could see, that selenium was unable to find an element, which definitely was present on the website. After some debugging and search in the internet I found out, that Internet Explorer 11 on Windows 8.1 by default has some<b> security settings</b>, which must be <b>disabled </b>in case to run Selenium tests on the machine.<br /><br /><ul><li>Disable the <b>Protection Mode</b> for <b>all zones</b></li><li>Disable "<b>Enhanced Protection Mode</b>"</li></ul><br />After I disabled both settings (directly in the "Internet Options") the tests were executed as expected.<br /><br />Also make sure to use <b>32 bit versions</b> of both the <b>Internet Explorer driver</b> and the <b>operating system</b>. I tried to get things running with the 64 bit version of Windows 8.1, but the test execution on Internet Explorer was <b>extremely slow</b> (it took about 4 seconds to type a character), so I ended up using the 32 bit version of Windows 8.1.<br /><br />

@@ -1,0 +1,17 @@
+---
+layout: post
+title: Integrating TYPO3 Flow commands to the PhpStorm command line tool
+date: '2012-10-29T17:09:00.002+01:00'
+author: Torben Hansen
+tags:
+- PhpStorm
+- TYPO3 Flow
+- Command line tool
+modified_time: '2012-10-29T17:14:46.377+01:00'
+thumbnail: http://4.bp.blogspot.com/-qCDHWlB2J6Q/UI6m7Af3N3I/AAAAAAAAB10/YoWjbq7KxLk/s72-c/TYPO3+Flow+PhpStorm.png
+blogger_id: tag:blogger.com,1999:blog-6517038209122183182.post-7439781867225821490
+blogger_orig_url: http://www.derhansen.de/2012/10/typo3-flow-command-line-tool-phpstorm.html
+permalink: /2012/10/typo3-flow-command-line-tool-phpstorm.html
+---
+
+Last week I <a href="http://blog.jetbrains.com/webide/2012/10/integrating-composer-command-line-tool-with-phpstorm/" target="_blank">read</a> about the possibility to integrate <a href="http://getcomposer.org/" target="_blank">composer</a><span id="goog_418455961"></span><span id="goog_418455962"></span><a href="http://www.blogger.com/"></a> to the PhpStorm command line tool. Inspired by this article, I created a configuration file for TYPO3 Flow commands.<br /><br /><table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container" style="margin-left: auto; margin-right: auto; text-align: center;"><tbody><tr><td style="text-align: center;"><a href="http://4.bp.blogspot.com/-qCDHWlB2J6Q/UI6m7Af3N3I/AAAAAAAAB10/YoWjbq7KxLk/s1600/TYPO3+Flow+PhpStorm.png" imageanchor="1" style="margin-left: auto; margin-right: auto;"><img border="0" height="198" src="http://4.bp.blogspot.com/-qCDHWlB2J6Q/UI6m7Af3N3I/AAAAAAAAB10/YoWjbq7KxLk/s400/TYPO3+Flow+PhpStorm.png" width="400" /></a></td></tr><tr><td class="tr-caption" style="text-align: center;">TYPO3 Flow command line integration in PhpStorm</td></tr></tbody></table>I published the configuration file on <a href="https://github.com/derhansen/typo3-flow-phpstorm-cl-xml" target="_blank">github</a>, so it can easily be shared, extended, forked or whatever.<br /><br />Sadly I did'nt get the <i>Quick Definition View</i> to work as it was described in the original article from Jetbrains.<br /><br /><b>Configuration:</b><br /><ol><li>Navigate to&nbsp;<i>Settings</i> | <i>Command Line Tool Support</i> and add custom configuration</li><li>Add the <i>Framework Name</i> (e.g. "TYPO3 Flow"), the <i>Tool path</i>&nbsp;(e.g. "./flow") and the <i>Alias </i>(e.g. "flow")</li><li>Import the XML configuration file available here:&nbsp;<a href="https://github.com/derhansen/typo3-flow-phpstorm-cl-xml">https://github.com/derhansen/typo3-flow-phpstorm-cl-xml</a></li></ol><div>Be sure to check, that the Tool path doesn't contain an absolute path to the flow executable.</div><div><br /></div><div><b>How to use it?</b></div><div><ol><li>Open a TYPO3 Flow project in PhpStorm and press CTRL + SHIFT + X</li><li>Check, that the current directory contains the TYPO3 Flow executable (in Linux systems you can use <i>pwd</i> to check the current directory). If not, navigate to that directory.</li><li>Enter a TYPO3 Flow command by using the alias defined in the configuration (in this example "flow")</li></ol><div><br /></div></div>

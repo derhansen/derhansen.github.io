@@ -1,0 +1,19 @@
+---
+layout: post
+title: Extending Extbase domain models and controllers using XCLASS
+date: '2019-03-18T15:33:00.000+01:00'
+author: Torben Hansen
+tags:
+- "#86270"
+- controller
+- config.tx_extbase.objects
+- model
+- extend
+- Extbase
+modified_time: '2019-03-18T15:33:47.755+01:00'
+blogger_id: tag:blogger.com,1999:blog-6517038209122183182.post-6111849216340821268
+blogger_orig_url: http://www.derhansen.de/2019/03/extending-extbase-domain-models-and.html
+permalink: /2019/03/extending-extbase-domain-models-and.html
+---
+
+In TYPO3 9.5 LTS it has been deprecated (<a href="https://docs.typo3.org/typo3cms/extensions/core/Changelog/9.5/Deprecation-86270-ExtbaseXclassViaTypoScriptSettings.html" target="_blank">see notice</a>) to extend Extbase classes using TypoScript&nbsp;<b>config.tx_extbase.objects</b> and&nbsp;<b>plugin.tx_%plugin%.objects</b>. In order to migrate existing extensions, which extends another TYPO3 extension, you should now use XLASSes.<br /><br />For my TYPO3 Extension <a href="https://github.com/derhansen/sf_event_mgt" target="_blank">sf_event_mgt</a> I also provide a small demo extension, which shows how to extend domain models and controllers of the main extension. The previous version using config.tx_extbase.objects can be found <a href="https://github.com/derhansen/sf_event_mgt_extend_demo/tree/0.2.0" target="_blank">here</a>. I migrated this demo extension to use XCLASSes instead.<br /><br />The code below shows, how two models and one controller are extended using XLASS<br /><br /><pre><code><br />// XCLASS event<br />$GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\DERHANSEN\SfEventMgt\Domain\Model\Event::class] = [<br />    'className' =&gt; \DERHANSEN\SfEventMgtExtendDemo\Domain\Model\Event::class<br />];<br /><br />// Register extended domain class<br />GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\Container\Container::class)<br />    -&gt;registerImplementation(<br />        \DERHANSEN\SfEventMgt\Domain\Model\Event::class,<br />        \DERHANSEN\SfEventMgtExtendDemo\Domain\Model\Event::class<br />    );<br /><br />// XCLASS registration<br />$GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\DERHANSEN\SfEventMgt\Domain\Model\Registration::class] = [<br />    'className' =&gt; \DERHANSEN\SfEventMgtExtendDemo\Domain\Model\Registration::class<br />];<br /><br />// Register extended registration class<br />GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\Container\Container::class)<br />    -&gt;registerImplementation(<br />        \DERHANSEN\SfEventMgt\Domain\Model\Registration::class,<br />        \DERHANSEN\SfEventMgtExtendDemo\Domain\Model\Registration::class<br />    );<br /><br />// XCLASS EventController<br />$GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\DERHANSEN\SfEventMgt\Controller\EventController::class] = [<br />    'className' =&gt; \DERHANSEN\SfEventMgtExtendDemo\Controller\EventController::class<br />];<br /></code><br /></pre><br />For domain models, the important part is the&nbsp;<b>registerImplementation()</b> call, since this instructs Extbase to use the extended domain model when an object is processed by the property mapper.<br /><br />Note, that there are some limitations using XCLASS, so it is highly recommended to read the official <a href="https://docs.typo3.org/typo3cms/CoreApiReference/ApiOverview/Xclasses/Index.html" target="_blank">documentation</a>.<br /><pre></pre>

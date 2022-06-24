@@ -1,0 +1,13 @@
+---
+layout: post
+title: Probleme mit TYPO3 4.7.2 und TemplaVoila
+date: '2012-07-09T10:22:00.000+02:00'
+author: Torben Hansen
+tags:
+modified_time: '2012-12-16T13:31:43.914+01:00'
+blogger_id: tag:blogger.com,1999:blog-6517038209122183182.post-1887087626344599396
+blogger_orig_url: http://www.derhansen.de/2012/07/probleme-mit-typo3-472-und-templavoila.html
+permalink: /2012/07/probleme-mit-typo3-472-und-templavoila.html
+---
+
+Mit TYPO3 4.7 habe ich bisher leider nur Pech gehabt. Direkt nachdem die Version 4.7 veröffentlicht wurde, habe ich diese in einem Projekt eingesetzt und musste dann feststellen, dass in CSS Styled Content ein ärgerlicher <a href="http://forge.typo3.org/issues/36541">Bug</a> enthalten war, der es unmöglich machte mit der Version zu arbeiten. Zum Glück konnte ich den Bug manuell patchen und somit erst mal mit der Version weiter arbeiten.<br /><br />Nachdem nun der Bug gefixed wurde, habe ich in einem anderen Projekt auch auf TYPO3 4.7 gesetzt und stehe nun gleich vor dem nächsten großen Bug, der mir das Arbeiten mit TYPO3 erschwert.<br /><br />Wenn man TYPO3 4.7.2 zusammen mit TemplaVoila 1.7.0 einsetzt, dann kann man (selbst als Admin) keine Inhalte mehr über das Seitenmodul anlegen. Es erscheint immer folgende Fehlermeldung:<br /><br /><b>Sorry, you didn't have proper permissions to perform this change.</b><br /><b><br /></b>Einen Bugfix scheint es noch nicht zu geben, der <a href="http://bugs.typo3.org/view.php?id=18583">Bug</a> ist aber schon mal im Bugtracker erfasst.<br /><br /><i>Update 11.07.2012</i><br />So, nun hat sich <a href="http://bugs.typo3.org/view.php?id=18582">etwas getan</a> und ich gehe mal davon aus, dass eine Lösung bald auf dem Weg sein wird.<br /><br /><i>Update 16.12.2012</i><br />Mittlerweile ist TemplaVoila 1.8 veröffentlicht und der Fehler wurde behoben.

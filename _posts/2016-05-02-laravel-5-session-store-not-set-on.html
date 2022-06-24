@@ -1,0 +1,16 @@
+---
+layout: post
+title: Laravel 5 - "Session store not set on request" running functional tests
+date: '2016-05-02T11:53:00.000+02:00'
+author: Torben Hansen
+tags:
+- Laravel 5
+- disable middleware
+- functional tests
+modified_time: '2016-05-02T11:53:05.276+02:00'
+blogger_id: tag:blogger.com,1999:blog-6517038209122183182.post-3298029146974191869
+blogger_orig_url: http://www.derhansen.de/2016/05/laravel-5-session-store-not-set-on.html
+permalink: /2016/05/laravel-5-session-store-not-set-on.html
+---
+
+tl;dr - If your Laravel functional tests fail with&nbsp;<b>"RuntimeException: Session store not set on request."</b>, don't use the&nbsp;<b>withoutMiddleware trait</b>&nbsp;in your tests and <b>selectively disable middleware</b> components you don't need when executing tests by using APP_ENV in your middleware.<br /><br />In a Laravel 5.2 project I had some initial problems setting up the functional tests. The test code was really simple as shown below:<br /><br /><pre><code><br />/**<br /> * Just a simple functional test case<br /> *<br /> * @test<br /> */<br />public function indexTest()<br />{<br />    $this-&gt;visit('/')<br />        -&gt;see('some text');<br />}<br /></code></pre><br />The test did not execute successfully and resulted in a NotFoundHttpException with the error message "<i>A request to [http://localhost/de] failed. Received status code [404].</i>". Root cause for this problem was my language middleware, which redirected the user to a predefined default language by adding the de/ URL prefix if a language prefix was not set.<br /><br />My first approach was to disable all middleware components by using the&nbsp;<b>withoutMiddleware trait</b> in my tests. Again, the test did not execute successfully and thew the RuntimeException <b>"Session store not set on request."</b>.<b>&nbsp;</b>Since I used the withoutMiddleware trait, I also disabled middleware components which were required by my application (e.g.&nbsp;VerifyCsrfToken,&nbsp;Authenticate).<br /><br />After some research on the internet, I found <a href="http://jakzaprogramowac.pl/pytanie/13326,how-to-disable-selected-middleware-in-laravel-tests" target="_blank">this</a> helpful answer and modified my languageMiddleware, so it will be skipped when running tests as shown below:<br /><br /><pre><code><br />/**<br /> * Handle an incoming request.<br /> *<br /> * @param  \Illuminate\Http\Request $request<br /> * @param  \Closure $next<br /> * @return mixed<br /> */<br />public function handle($request, Closure $next)<br />{<br />    if (env('APP_ENV') === 'testing') {<br />        return $next($request);<br />    }<br /><br />    // Redirecting to default language if not set. <br />    // Code skipped to keep the example simple. <br /><br />    return $next($request);<br />}<br /></code></pre><br />This technique can be applied to any middleware component, which you want to disable when running functional tests.<br /><br /><br />

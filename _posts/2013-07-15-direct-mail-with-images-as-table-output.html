@@ -1,0 +1,16 @@
+---
+layout: post
+title: Direct Mail with images as table-output in TYPO3 6.x
+date: '2013-07-15T08:29:00.000+02:00'
+author: Torben Hansen
+tags:
+- TYPO3 6.x
+- Direct Mail
+- HTML Newsletter
+modified_time: '2013-07-15T08:29:09.783+02:00'
+blogger_id: tag:blogger.com,1999:blog-6517038209122183182.post-8053506113377270879
+blogger_orig_url: http://www.derhansen.de/2013/07/direct-mail-with-images-as-table-output.html
+permalink: /2013/07/direct-mail-with-images-as-table-output.html
+---
+
+With TYPO3 6.x, "renderMethod = table" seem to be deprecated and does'nt seem to be fully supported anymore. For sites using <b>Direct Mail</b>, this could be an issue, since one of the best ways to keep HTML newsletters compatible with most of all e-mail-clients is to render the output with tables. Especially when it comes to <i>images in newsletters</i>, it is best to use a table layout to be sure, that the images are positioned as expected.<br /><br />I had to setup a TYPO3 6.x site with Direct Mail and faced the issue described above. Also images where not displayed in the newsletter, which also seems to be an issue when you use Direct Mail in combination with TYPO3 6.x<br /><br />To handle those issued the following steps are&nbsp;necessary:<br /><br /><ol><li>For your newsletter TS template, do not include "CSS Styled Content", but "CSS Styled Content TYPO3 v4.7". This version of CSS Styled Content still includes the table rendering method.</li><li>Include&nbsp;config.absRefPrefix = {$plugin.tx_directmail_pi1.siteUrl} in your newsletter TS Setup. This fixes the problem with images not being displayed.</li></ol><div>After using the settings decribed above, I could successfully send HTML e-mails using Direct Mail in TYPO3 6.x. The solution has been found using TYPO3 forge, where both issues already have been reported.</div><div><br /></div><div><br /></div>

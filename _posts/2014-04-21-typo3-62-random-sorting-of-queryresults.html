@@ -1,0 +1,16 @@
+---
+layout: post
+title: TYPO3 6.2 - Random sorting of QueryResults
+date: '2014-04-21T14:33:00.000+02:00'
+author: Torben Hansen
+tags:
+- queryResult
+- random
+- TYPO3 6.2
+modified_time: '2014-04-22T19:01:27.728+02:00'
+blogger_id: tag:blogger.com,1999:blog-6517038209122183182.post-8820568912695213046
+blogger_orig_url: http://www.derhansen.de/2014/04/typo3-62-random-sorting-of-queryresults.html
+permalink: /2014/04/typo3-62-random-sorting-of-queryresults.html
+---
+
+In one of my TYPO3 Extensions I use MySQL RAND() to randomize the result of returned records. Actually, I use exactly the method as described <a href="http://typo3blogger.de/random-record-repository/" target="_blank">here</a> in the comments. You take the original query, extract all statement parts, add RAND() to the sorting in the statement parts and then you rebuild the query and finally you set the SQL statement of the query.<br /><br />In TYPO3 6.2 LTS, this method of generating a random resultset is not supported anymore, since the method <b>buildQuery()</b> has been removed from <b>Typo3DbBackend</b>. I first tried to just insert the original buildQuery() method in my code and call it, but since ExtBase in TYPO3 6.2 uses prepared statements, you can't use the original buildQuery method.<br /><br />I really needed random sorting in my extension, so I debugged a couple of hours and came finally to the solution, that it would be best to <b>extend</b>&nbsp;the <b>QueryResult</b> class in<b> </b>Extbase<b>.&nbsp;</b>As the QueryResult class uses arrays to store the query result, it should be easy to use PHP shuffle function to randomize the sorting of the array.<br /><br />My new class randomQueryResult has just some small enhancements as you can see below.<br /><pre><code><br />use TYPO3\CMS\Extbase\Persistence\Generic\QueryResult;<br /><br />class RandomQueryResult extends QueryResult {<br /><br /> /**<br />  * Keeps track of, if queryResult has been shuffled<br />  */<br /> protected $shuffled = FALSE;<br /><br /> /**<br />  * Loads the objects this QueryResult is supposed to hold<br />  *<br />  * @return void<br />  */<br /> protected function initialize() {<br />  parent::initialize();<br />  if (!$this-&gt;shuffled) {<br />   shuffle($this-&gt;queryResult);<br />   $this-&gt;shuffled = TRUE;<br />  }<br /> }<br />}<br /></code></pre><br />Now you can just use the&nbsp;RandomQueryResult&nbsp;class with your query and you will get the expected query results in random&nbsp;order.<br /><pre><code><br />$result = $this-&gt;objectManager-&gt;get('Vendor\Extension\Path\RandomQueryResult', $query);<br /></code></pre><br />Note: The original version of the blogpost contained a version with much more code (see revisions <a href="https://gist.github.com/derhansen/11142338" target="_blank">here</a>), where I implemented a new class based on QueryResultInterface.

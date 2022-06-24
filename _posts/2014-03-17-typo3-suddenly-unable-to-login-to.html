@@ -1,0 +1,17 @@
+---
+layout: post
+title: TYPO3 - suddenly unable to login to backend
+date: '2014-03-17T15:08:00.001+01:00'
+author: Torben Hansen
+tags:
+- login not possible
+- rsaauth
+- TYPO3
+- saltedpasswords
+modified_time: '2014-03-17T15:08:53.072+01:00'
+blogger_id: tag:blogger.com,1999:blog-6517038209122183182.post-7624218780256967450
+blogger_orig_url: http://www.derhansen.de/2014/03/typo3-suddenly-unable-to-login-to.html
+permalink: /2014/03/typo3-suddenly-unable-to-login-to.html
+---
+
+Last week I had a really strange problem with one of my TYPO3 websites. A&nbsp;colleague came to me and said he was <b>unable to login to the TYPO3 backend</b>. I tried to login with my own TYPO3 backend account and experienced the same problem.<br /><br />First I thought the TYPO3 site could have been&nbsp;<i>hacked</i>, so I took a look into the <b>be_users</b> and <b>sys_log</b> tables of the TYPO3 installation but could not see anything&nbsp;suspicious. Also the webservers <b>logfiles </b>did'nt show any errors. I then logged into the TYPO3 install tool and created a <b>new admin</b> backend user for the TYPO3 site. With this user, I should be able to login to the TYPO3 backend... well, at least I thought so. But also with the new admin account I was'nt able to login, so something was really wrong with the TYPO3 website.<br /><br />Again I looked into the be_users table and saw, that the newly admin account had a normal <b>MD5 hash</b> in the <b>password </b>field. The site used <b>rsaauth </b>and <b>saltedpassword </b>and normally both extensions<b>&nbsp;</b>should be able to distinguish between passwords with MD5 hashes and password with salted hashes, but&nbsp;obviously not on this TYPO3 website. I therefore <b>removed</b> both <b>rsaauth </b>and <b>saltedpasswords</b>, resetted the loginSecurityLevel to "normal" mode in the TYPO3 install tool and was finally able to login to the TYPO3 backend with my new admin user.<br /><br />So the login problems must have something to do with saltedpasswords and rsaauth. First I checked the path, where rsaauth writes its temporary data, but could not see anything special there. Next I wanted to check the database table, where rsaauth stores the private keys and finally came to the solution of this problem.<br /><br />The database <b>table&nbsp;tx_rsaauth_keys</b> was marked as <b>crashed </b>and could not be repaired automatically. So the rsaauth extension was unable to write its private keys to the database and therefore the rsaauth login never succeeded. After I <b>reparied </b>the crashed table manually and <b>reenabled rssauth </b>and <b>saltedpasswords</b>, everything worked fine again.<br /><br />

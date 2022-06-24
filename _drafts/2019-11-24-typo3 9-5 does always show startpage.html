@@ -1,0 +1,11 @@
+---
+layout: post
+title: TYPO3 9.5 does always show startpage
+date: '2019-11-24T13:29:00.000+01:00'
+author: Torben Hansen
+tags:
+modified_time: '2019-11-24T13:29:49.205+01:00'
+blogger_id: tag:blogger.com,1999:blog-6517038209122183182.post-1982722212346895210
+---
+
+TD:DR - Ensure to define the site "base" with the correct schema when SSL if offloaded<br /><br />- SiteMatcher could not match the site for the current domain<br />- TYPO3 will by default show first page of Website<br />- PageRouter never called (since no site)<br />- Siteconfig "base" != Webseite domain/schema<br />-&nbsp;UrlMatcher liefert aufgrund eines nicht konfigurierten Schemas eine Pseudo-Site zurück<br />- Bei SSL Termination wichtig, dass das Offloading dann auch in den Sites über das Schema konfiguriert ist, da sonst die Site nicht aufgelöst werden kann!<br /><br />UrlMatcher von Symfony! (Zeile 188)<br />if ($route-&gt;getSchemes() &amp;&amp; !$route-&gt;hasScheme($this-&gt;context-&gt;getScheme())) {<br /><br /><br />Problem kann man auch nicht direkt im Backend sehen, da z.B. über den Application Context gesetzte Bedingungen für die Entry Points valide erkannt werden<br /><br />Bei 404 auf allen Unterseiten -&gt; Prüfen ob .htaccess geladen wird und wenn nicht, prüfen ob "AllowOverride" irgendwo auf none steht

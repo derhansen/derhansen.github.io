@@ -1,0 +1,19 @@
+---
+layout: post
+title: How to use content element layouts with gridelements
+date: '2013-11-12T13:44:00.000+01:00'
+author: Torben Hansen
+tags:
+- content element layout
+- Gridelement
+- TYPO3
+- divider
+- layout
+modified_time: '2013-11-12T13:44:22.156+01:00'
+thumbnail: http://1.bp.blogspot.com/-rYxXAz4RBdo/UoIcwqk5pQI/AAAAAAAAICE/i80oD5Yx1fs/s72-c/ce-layout.jpg
+blogger_id: tag:blogger.com,1999:blog-6517038209122183182.post-900697374124523468
+blogger_orig_url: http://www.derhansen.de/2013/11/how-to-use-content-element-layouts-with.html
+permalink: /2013/11/how-to-use-content-element-layouts-with.html
+---
+
+I often use the <b>content element layout</b> field in TYPO3 to add some selective CSS styling to content elements. For example, if the editor inserts a divider content element on a TYPO3 page, she/he can <b>adjust the color</b> of the divider by using the content element layout field like shown below.<br /><br /><div class="separator" style="clear: both; text-align: center;"><a href="http://1.bp.blogspot.com/-rYxXAz4RBdo/UoIcwqk5pQI/AAAAAAAAICE/i80oD5Yx1fs/s1600/ce-layout.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="182" src="http://1.bp.blogspot.com/-rYxXAz4RBdo/UoIcwqk5pQI/AAAAAAAAICE/i80oD5Yx1fs/s320/ce-layout.jpg" width="320" /></a></div><br /><br />I just define the available layouts in the page TS of the root page.<br /><pre><code><br />TCEFORM.tt_content.layout {<br />  addItems.60 = Color: Brown<br />  addItems.61 = Color: Gray<br />}<br /></code></pre><br />Then I use the following Typoscript to add an extra css class to the divider (e.g. brown and gray).<br /><pre><code><br />temp &lt; tt_content.div<br />tt_content.div = CASE<br />tt_content.div {<br />  key.field = layout<br />  default &lt; temp<br />  <br />  60 = COA<br />  60 &lt; temp<br />  60.wrap = &lt;div class="divider brown"&gt;|&lt;/div&gt;<br /><br />  61 = COA<br />  61 &lt; temp<br />  61.wrap = &lt;div class="divider gray"&gt;|&lt;/div&gt;<br />}<br /></code></pre><br />Normally I <b>globally </b>use the defined <b>content element layouts</b> on other content elements too (e.g. headers), so the editor always uses the same field in TYPO3 to change the colors of content elements. You can also use the shown technique with <b>gridelements</b>, so the user can change the css styling of the gridelement&nbsp;without the need to use a <b>flexform configuration</b>. I just <b>reuse </b>the previously defined content element layout in the Typoscript of my gridelement as shown below by using a CASE on the wrap.<br /><pre><code><br /># ID of gridelement <br />1 &lt;  lib.gridelements.defaultGridSetup<br />1 {<br />  columns {<br />    # column 1<br />    0 &lt; .default<br />    0.wrap = &lt;div class="column1"&gt;|&lt;/div&gt;<br /><br />    # column 2<br />    1 &lt; .default<br />    1.wrap = &lt;div class="column2"&gt;|&lt;/div&gt;<br />  }<br />  wrap.cObject = CASE<br />  wrap.cObject {<br />    key.field = layout<br />    default = TEXT<br />    default.value = &lt;div class="mydefaultclass"&gt;|&lt;/div&gt;<br /><br />    60 = TEXT<br />    60.value = &lt;div class="mydefaultclass brown"&gt;|&lt;/div&gt;<br /><br />    61 = TEXT<br />    61.value = &lt;div class="mydefaultclass gray"&gt;|&lt;/div&gt;<br />  }<br />}<br /></code></pre><br />Now the gridelement uses the TYPO3 content layout field to add an extra CSS class to its wrap.

@@ -1,0 +1,11 @@
+---
+layout: post
+title: How to clone an extbase object
+date: '2019-04-26T13:36:00.001+02:00'
+author: Torben Hansen
+tags:
+modified_time: '2019-04-26T13:36:16.471+02:00'
+blogger_id: tag:blogger.com,1999:blog-6517038209122183182.post-7886138688949917811
+---
+
+Beispiel etwas besser zusammenfassen. PropertyIgnore Array einbauen<br /><pre><code><br />    /**<br />     * Clones the given event<br />     *<br />     * @param \WW\WwEvents\Domain\Model\Event $event<br />     * @return void<br />     */<br />    public function cloneAction(Event $event)<br />    {<br />        $newEvent = new Event();<br /><br />        $properties = $event-&gt;_getProperties();<br />        foreach ($properties as $propertyName =&gt; $value) {<br />            if ($propertyName === 'uid') {<br />                continue;<br />            }<br /><br />            if ($value instanceof ObjectStorage) {<br />                $newObjectStorage = new ObjectStorage();<br />                /** $value ObjectStorage */<br />                foreach ($value as $singleValue) {<br />                    $newObjectStorage-&gt;attach($singleValue);<br />                }<br />                ObjectAccess::setProperty($newEvent, $propertyName, $newObjectStorage);<br />            } else {<br />                ObjectAccess::setProperty($newEvent, $propertyName, $value);<br />            }<br />        }<br /><br />        // Finally set fields<br />        $newEvent-&gt;setHidden(true);<br />        $newEvent-&gt;setTitle($newEvent-&gt;getTitle() . ' (kopie)');<br /><br />        $this-&gt;eventRepository-&gt;add($newEvent);<br /><br />        $this-&gt;redirect('list');<br />    }<br /></code></pre>

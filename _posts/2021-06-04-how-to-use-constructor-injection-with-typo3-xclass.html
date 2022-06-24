@@ -1,0 +1,17 @@
+---
+layout: post
+title: How to use constructor dependency injection in a XCLASSed TYPO3 class
+date: '2021-06-04T16:20:00.003+02:00'
+author: Torben Hansen
+tags:
+- extend controller
+- symfony dependency injection
+- xclass
+- Extbase
+- TYPO3
+modified_time: '2021-06-04T16:22:16.454+02:00'
+blogger_id: tag:blogger.com,1999:blog-6517038209122183182.post-3448183742453201974
+permalink: /2021/06/how-to-use-constructor-injection-with-typo3-xclass.html
+---
+
+<p>Some time ago in needed to extend an Extbase controller in TYPO3 10.4 which used dependency injection through constructor injection. So I used XCLASS to extend the original controller and added an own constructor which added an additional dependency, but this obviously did not work out properly, since the constructor was always called with the amount of arguments from the original class.</p><p>Later I created this <a href="https://forge.typo3.org/issues/91750">issue</a> on TYPO3 forge in order to find out if this is a bug/missing feature or if I missed something in my code. In order to demonstrate the problem, I created <a href="https://github.com/derhansen/xclass_di">this</a> small demo extension which basically just extended a TYPO3 core class using XCLASS&nbsp;and just days later, a solution for the issue was provided.</p><p>The solution is pretty simple and you just have to ensure to add a reference to the extended class in the Services.yaml file of the extending extension.</p><p>Example:</p><pre><code><br />  TYPO3\CMS\Belog\Controller\BackendLogController: '@Derhansen\XclassDi\Controller\ExtendedBackendLogController'<br /></code></pre> <p>The complete Services.yaml file can be found <a href="https://github.com/derhansen/xclass_di/blob/main/Configuration/Services.yaml">here</a>.</p><p>Thanks a lot to&nbsp;Lukas Niestroj, who <a href="https://github.com/derhansen/xclass_di/issues/1">pointed out</a> the solution to the problem.</p><p><br /></p>

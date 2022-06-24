@@ -1,0 +1,19 @@
+---
+layout: post
+title: TYPO3 - Kopfgrafik als Resource per Inline CSS sliden
+date: '2012-09-04T14:41:00.000+02:00'
+author: Torben Hansen
+tags:
+- Inline CSS
+- Media
+- slide
+- TYPO3
+- Kopfgrafik
+modified_time: '2012-09-04T14:42:23.931+02:00'
+thumbnail: http://4.bp.blogspot.com/-tkx78TQSnTI/UEXwLWORtfI/AAAAAAAABUU/mLcvX2pDDaY/s72-c/ressourcen.jpg
+blogger_id: tag:blogger.com,1999:blog-6517038209122183182.post-553332856589189391
+blogger_orig_url: http://www.derhansen.de/2012/09/kopfgrafik-als-resource-per-inline-css.html
+permalink: /2012/09/kopfgrafik-als-resource-per-inline-css.html
+---
+
+In einem Projekt wollte ich es dem Redakteur erlauben, die Kopfgrafik der Webseite auszutauschen. Die Kopfgrafik sollte sliden, sprich sich auf alle Unterseiten runter erben. Generell ist das ja auch kein Problem, wenn die Kopfgrafik ein eigenständiges Bild ist, welches direkt im Quelltext ausgegeben werden kann. Man definiert in TemplaVoila einen Marker, stellt dem User im TemplaVoila Template ein Feld zur Verfügung wo er das Bild ändern kann und schon ist man fertig. Will man das ganze noch sliden, dann nutzt man die Extension kb_tv_cont_slide. So weit, so gut.<br /><br />Wenn man nun aber die <b>Kopfgrafik per CSS</b> festgelegt hat, dann wird es schon etwas schwieriger. Man müsste praktisch per TypoScript eine CSS generieren, welches eine vom User ausgewählte Kopfgrafik einbindet. Wie dieses geht, zeige ich in diesem Artikel.<br /><br />In den Seiteneigenschaften kann der Redakteur eine (oder auch mehrere) Kopfgrafiken in den Ressourcen unter "Datei" hochladen.<br /><br /><div class="separator" style="clear: both; text-align: center;"><a href="http://4.bp.blogspot.com/-tkx78TQSnTI/UEXwLWORtfI/AAAAAAAABUU/mLcvX2pDDaY/s1600/ressourcen.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="145" src="http://4.bp.blogspot.com/-tkx78TQSnTI/UEXwLWORtfI/AAAAAAAABUU/mLcvX2pDDaY/s320/ressourcen.jpg" width="320" /></a></div><div class="separator" style="clear: both; text-align: center;"><br /></div><div class="separator" style="clear: both; text-align: left;">Um den Verweis auf diese &nbsp;Datei nun in eine CSS auszugeben, muss man im TS folgendes hinzufügen.</div><div class="separator" style="clear: both; text-align: left;"><br /></div><pre><code>page.cssInline {<br />  10 = TEXT<br />  10 {<br />    wrap (<br />      .header {<br />        background-image: url(../'uploads/media/|');  <br />      }<br />    )<br />    data = levelmedia:-1,slide<br />  }<br />}<br /></code></pre><br />Dieses TS generiert die gewünschte CSS Datei. Glücklicherweise wird dieses auch ab TYPO3 4.5 per &lt;link&gt;-Tag gemacht und nicht direkt per Inline CSS ausgegeben, wie man anhand der Bezeichnung meinen könnte.<br /><br />Man muss beachten, dass die CSS Datei im typo3temp-Ordner erstellt wird, was dazu führt, dass man bei der URL für das Hintergrundbild wieder eine Verzeichnis-Ebene höher muss um im upload-Ordner zu landen.<br /><br />Der Wert bei "data" kann auch einfach "field:media" enthalten, wenn man den Inhalt nicht sliden möchte.

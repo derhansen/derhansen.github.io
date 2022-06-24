@@ -1,0 +1,17 @@
+---
+layout: post
+title: TYPO3 und Chrome 21.0.1180.60 - Flash Uploader ohne Funktion
+date: '2012-08-03T10:17:00.001+02:00'
+author: Torben Hansen
+tags:
+- Flash Uploader
+- TYPO3
+- Chrome 21.0.1180.60
+modified_time: '2012-08-03T10:17:46.518+02:00'
+thumbnail: http://1.bp.blogspot.com/-UfaUxht7uYU/UBuGf0XDeXI/AAAAAAAABP8/3FUrZI1mkws/s72-c/flash-uploader.png
+blogger_id: tag:blogger.com,1999:blog-6517038209122183182.post-5874398135063637005
+blogger_orig_url: http://www.derhansen.de/2012/08/typo3-und-chrome-210118060-flash.html
+permalink: /2012/08/typo3-und-chrome-210118060-flash.html
+---
+
+Seit heute Morgen funktioniert bei mir in <b>TYPO3</b> der <b>Flash Uploader</b> nicht mehr richtig - zumindest nicht in meinem <b>Chrome </b>(Version <b>21.0.1180.60</b>) auf einem 64 Bit Windows 7. Man kann auf dem "Select Files" Button klicken, aber nichts passiert. Da der&nbsp;Flash Uploader in allen anderen Browsern (Firefox, Sarafi, Internet Explorer und Opera) ohne Probleme funktioniert, muss das Problem also irgendwie mit dem Chrome Update zusammen hängen, welches sich heute morgen automatisch installiert hat.<br /><br />Nach einigen Testen habe ich dann einen <b>Workaround </b>gefunden, wie man im Chrome&nbsp;(Version 21.0.1180.60) den Flash Uploader wieder zum "Leben" erweckt. Ein sehr kleiner Bereich des "Select Files" Buttons scheint nämlich doch noch zu funktionieren.<br /><br /><div class="separator" style="clear: both; text-align: left;"><a href="http://1.bp.blogspot.com/-UfaUxht7uYU/UBuGf0XDeXI/AAAAAAAABP8/3FUrZI1mkws/s1600/flash-uploader.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="144" src="http://1.bp.blogspot.com/-UfaUxht7uYU/UBuGf0XDeXI/AAAAAAAABP8/3FUrZI1mkws/s320/flash-uploader.png" width="320" /></a></div><br />Der <b>rot markierte Bereich</b> des Buttons funktioniert noch um Dateien für den Upload zu selektieren. Der Rest des Buttons ist ohne Funktion.<br /><br />Hier zeigt sich &nbsp;ein Nachteil an automatischen Updates, welche sich im Hintergrund und ohne Mitteilung an den User installieren. Da Chrome dem User nicht benachrichtigt, dass ein Update installiert wurde, wäre es auch nahe liegend gewesen, als erstes TYPO3 als Ursache für den nicht funktionierenden Flash Uploader zu vermuten.<br /><br />Die Frage ist nun, wo genau das Problem zu reporten ist, denn so richtig klar ist es mir noch nicht, wer (TYPO3 oder Chrome) für das Problem verantwortlich ist. Meine Vermutung geht stark in Richtung Chrome, aber vielleicht enthält der TYPO3 Flash Uploader ja auch irgendwie einen Fehler, der sich nun durch das Chrome Update bemerkbar macht.

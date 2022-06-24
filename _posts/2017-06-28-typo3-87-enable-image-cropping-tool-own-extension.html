@@ -1,0 +1,16 @@
+---
+layout: post
+title: TYPO3 8.7 LTS - How to enable the image cropping tool in your own extension
+date: '2017-06-28T13:49:00.000+02:00'
+author: Torben Hansen
+tags:
+- Image Cropping
+- typo3 8.7
+- Extbase
+modified_time: '2017-06-28T13:52:04.458+02:00'
+blogger_id: tag:blogger.com,1999:blog-6517038209122183182.post-6076001017105213347
+blogger_orig_url: http://www.derhansen.de/2017/06/typo3-87-enable-image-cropping-tool-own-extension.html
+permalink: /2017/06/typo3-87-enable-image-cropping-tool-own-extension.html
+---
+
+People using TYPO3 7.6 or 8.7 for sure know the cool Image Cropping tool that was introduced with TYPO3 7. As an extension developer, you can easily switch on the Image Cropping tool for your own extension by enabling adding the <i>imageoverlayPalette</i> to the&nbsp;<i>foreign_types</i>&nbsp;config array for the&nbsp;<i>FILETYPE_IMAGE</i> in the TCA like shown in <a href="https://typo3worx.eu/2016/02/image-cropping-typo3-backend/" target="_blank">this blogpost</a> by Marcus Schwemer. In TYPO3 8.7 the <b>Image Cropping tool does not show</b> as expected, due to structural TCA changes in the TYPO3 8.<br /><br />For TYPO3 8.7, the following (minimal) TCA configuration will enable the Image Cropping tool for the field "image" in an own extension:<br /><br /><pre><code><br />'image' =&gt; [<br />    'exclude' =&gt; 1,<br />    'label' =&gt; 'LLL:EXT:custom_extension/Resources/Private/Language/locallang_db.xlf:tx_customextension_domain_model_tablename.custom_field',<br />    'config' =&gt; \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig('image', [<br />        'foreign_match_fields' =&gt; [<br />            'fieldname' =&gt; 'image',<br />            'tablenames' =&gt; 'tx_customextension_domain_model_tablename',<br />            'table_local' =&gt; 'sys_file',<br />        ],<br />        'overrideChildTca' =&gt; [<br />            'types' =&gt; [<br />                \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE =&gt; [<br />                    'showitem' =&gt; '<br />                            --palette--;LLL:EXT:lang/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,<br />                            --palette--;;filePalette'<br />                ],<br />            ],<br />        ],<br />        'minitems' =&gt; 0,<br />        'maxitems' =&gt; 999,<br />    ], $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']),<br />],<br /></code></pre><br />Note, that the configuration array only shows the configuration for a single field and that the array must be located in the <b>"columns"-array</b> of your domain model TCA. For TYPO3 8.7, the <b>overrideChildTca</b>&nbsp;config is the important part, which enables the Image Cropping tool.<br /><br />If your extension needs to support TYPO3 7.6 and 8.7, your TCA should include both the <b>overrideChildTca</b> config as described in this blogpost and the&nbsp;<b>foreign_types</b> config as described in Marcus's blogpost.<br /><br /><br /><br /><br />

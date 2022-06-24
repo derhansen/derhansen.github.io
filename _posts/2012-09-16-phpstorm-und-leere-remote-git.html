@@ -1,0 +1,16 @@
+---
+layout: post
+title: PhpStorm und leere remote git Repositories
+date: '2012-09-16T19:02:00.000+02:00'
+author: Torben Hansen
+tags:
+- PhpStorm
+- git
+- remote repository
+modified_time: '2012-09-16T19:02:05.020+02:00'
+blogger_id: tag:blogger.com,1999:blog-6517038209122183182.post-819808072029176786
+blogger_orig_url: http://www.derhansen.de/2012/09/phpstorm-und-leere-remote-git.html
+permalink: /2012/09/phpstorm-und-leere-remote-git.html
+---
+
+<div>Nachdem ich nun auf PhpStorm umgestiegen bin, habe ich mich damit beschäftigt die Projekte aus meinem Git Repositories zu clonen. Zum Test wollte ich auch mal ausprobieren, wie man eine lokales Git Repository aus der IDE auf ein leeres remote Repository pusht. Tja, nach einigen Rumprobieren bin ich auf ein Foren-Eintrag bei Jetbrains gestoßen, der besagte, dass dieses wohl aus der IDE nicht möglich ist.<br /><br />Also schnell in die Kommande-Zeile gewechselt und das lokale Git Repository in ein leeres remote Repository gepusht.<br /><br />Dazu nutzt man folgende Befehle:<br /><pre>git remote add origin ssh://user@example.com/GIT/project.git<br />git push --set-upstream origin master<br /></pre>Nachdem man die Befehle ausgeführt hat, kann man in der IDE dann auch zukünftig die lokalen Änderungen an das remote Repository pushen.  Irgendwie merkwürdig, dass diese Funktion nicht in PhpStorm implementiert ist. Oder ich habe sie einfach nicht gefunden ;-)</div>

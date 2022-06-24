@@ -1,0 +1,13 @@
+---
+layout: post
+title: Zugriff auf eigene Extension Konfiguration aus Extbase Scheduler Task
+date: '2012-06-05T20:10:00.003+02:00'
+author: Torben Hansen
+tags:
+modified_time: '2012-06-05T20:11:18.320+02:00'
+blogger_id: tag:blogger.com,1999:blog-6517038209122183182.post-6171651889476446949
+blogger_orig_url: http://www.derhansen.de/2012/06/zugriff-auf-extbase-extension.html
+permalink: /2012/06/zugriff-auf-extbase-extension.html
+---
+
+In einem Projekt wollte ich aus einem Extbase Scheduler Task heraus E-Mails versenden. Der Body dieser E-Mails sollte über Fluid Templates gerendert werden. In diesem Zusammenhang hatte ich auch schon einen entsprechenden Artikel im Wiki zu Extbase gefunden.<br /><br /><a href="http://forge.typo3.org/projects/typo3v4-mvc/wiki/How_to_use_the_Fluid_Standalone_view_to_render_template_based_emails" target="_blank">http://forge.typo3.org/projects/typo3v4-mvc/wiki/How_to_use_the_Fluid_Standalone_view_to_render_template_based_emails</a><br /><br />Bei Scheduler Tasks aus Extbase muss man nun jedoch den Kontext bedenken, unter dem der Scheduler Task läuft. In diesem Fall läuft der eingerichtete Scheduler Task im Kontext der Extbase Extension, was zur Folge hat, dass der ConfigurationManager mit folgendem Code das Typoscript Setup der Extension Extbase zurückliefert.<br /><pre><code><br />$extbaseFrameworkConfiguration = $this-&gt;configurationManager-&gt;getConfiguration(Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);<br /></code></pre>Um nun im Scheduler Task auf die Konfiguration seiner eigenen Extension zugreifen zu können, muss man wir folgt vorgehen.<br /><br />Man holt sich die komplette Typoscript Konfiguration der TYPO3 Installation.<br /><pre><code><br />$extbaseFrameworkConfiguration = $this-&gt;configurationManager-&gt;getConfiguration(Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT);<br /></code></pre>Danach kann man aus dem Typoscript (welches ja nur ein großes Array ist) die Konfiguration seiner Extension auslesen. <br /><pre><code><br />$config = $extbaseFrameworkConfiguration['plugin.']['tx_helloworld.']['irgendeine_einstellung']<br /></code></pre>Wichtig ist, dass man die Punkte jeweils nach "plugin" und dem Extensionnamen beachtet. Im Zweifel kann man sich auch einfach das ganze Typoscript Array ausgeben und schauen, wo genau im Array sich die gewünschten Einstellungen befinden.

@@ -1,0 +1,17 @@
+---
+layout: post
+title: TYPO3 - Conditionally add an additional wrap to RTE links using Typoscript
+date: '2014-02-21T14:48:00.000+01:00'
+author: Torben Hansen
+tags:
+- typoscript
+- TYPO3
+- RTE
+- lib.parseFunc_RTE
+modified_time: '2016-05-07T19:59:28.051+02:00'
+blogger_id: tag:blogger.com,1999:blog-6517038209122183182.post-8340885840987466989
+blogger_orig_url: http://www.derhansen.de/2014/02/typo3-add-additional-wrap-to-rte-links.html
+permalink: /2014/02/typo3-add-additional-wrap-to-rte-links.html
+---
+
+In a project I needed to enable the editor to create links in RTE, that automatically should get a wrap based on the class the link has.<br /><br />Assume the editor creates a link in RTE and selects the link class "myClass". The resulting HTML output is:<br /><pre><code><br />&lt;a href="target-page-id" class="myClass" title="sometitle"&gt;My Link&lt;/a&gt;<br /></code></pre><br />My CSS styling now required, that the a-tag must be surrounded with a div-tag that has a special class. My final output should look like this:<br /><pre><code><br />&lt;div class="anotherClass"&gt;<br />&nbsp;&nbsp;&lt;a href="target-page-id" class="myClass" title="sometitle"&gt;My Link&lt;/a&gt;<br />&lt;/div&gt;<br /></code></pre><br />As I did'nt want to bother the editor with special frames and layouts for the RTE text, the additional class should be added automatically as soon as the link has the special class name.<br /><br />Well, what sounds simple, can be hard to process...<br /><br />I asked on <a href="http://stackoverflow.com/questions/21848152/rte-wrap-link-based-on-condition" target="_blank">stackoverflow</a> but did'nt get an answer. After some research, I found this <a href="http://wiki.typo3.org/External_links" target="_blank">article</a> on TYPO3 wiki, which pointed me to the right direction. I did some hours of Typoscript debugging and finally managed to get a working solution.<br /><pre><code><br />lib.parseFunc.tags.link {<br />  typolink.parameter.append = LOAD_REGISTER<br />  typolink.parameter.append {<br />    linkClass {<br />      cObject = TEXT<br />      cObject {<br />        stdWrap.data = parameters:allParams<br />      }<br />      # Split link params by space-char. 3rd value is the link class name<br />      split {<br />        token.char = 32<br />        # Option for TYPO3 7.6+ below<br />        cObjNum = 1||2||3||*<br />        # Option for TYPO3 6.2 LTS<br />        #cObjNum = 1||2||3<br />        3 = TEXT<br />        3.current = 1        <br />      }<br />    }<br />  }<br />  newWrap.cObject = CASE<br />  newWrap.cObject {<br />    key.data = register:linkClass<br />    # Set outer wrap for links depending on class name<br />    default = TEXT<br />    default.value = |<br />    myClass = TEXT<br />    myClass.value = &lt;div class="anotherClass"&gt;|&lt;/div&gt;<br />    internal-link = TEXT<br />    internal-link.value = &lt;div class="anotherClassForInternalLink"&gt;|&lt;/div&gt;<br />  }<br />}<br /><br />lib.parseFunc_RTE.tags.link {<br />  typolink.parameter.append &lt; lib.parseFunc.tags.link.typolink.parameter.append<br />  wrap &lt; lib.parseFunc.tags.link.newWrap<br />}<br /></code></pre><br />TYPO3 is just so powerfull and extendable that you never finish learning.

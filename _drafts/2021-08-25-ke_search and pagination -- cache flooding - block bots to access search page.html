@@ -1,0 +1,11 @@
+---
+layout: post
+title: ke_search and pagination -> cache flooding - Block bots to access search page
+date: '2021-08-25T14:44:00.001+02:00'
+author: Torben Hansen
+tags:
+modified_time: '2021-08-25T14:44:32.056+02:00'
+blogger_id: tag:blogger.com,1999:blog-6517038209122183182.post-4284743862372563795
+---
+
+<pre># Deny access to search page for Google and Bing Bot<br />RewriteCond %{HTTP_USER_AGENT} ^.*(googlebot|bingbot).*$ [NC]<br />RewriteCond %{REQUEST_URI} ^(/suche/|/en/search/|/fr/recherche/|/cs/vyhledavani/|/nl/zoeken/)$ [NC]<br />RewriteCond %{QUERY_STRING} ^.*(tx_kesearch_pi1%5Bpage%5D|tx_kesearch_pi1\[page\]).*$ [NC]<br />RewriteRule ^(.*)$ - [F,L]<br /></pre>  <p>htaccess regel oben</p><p><br /></p><p><b>Beste Lösung:</b> FE.cacheHash.excludedParameters</p><p><br /></p><p>tx_kesearch_pi1[page],tx_kesearch_pi1[resetFilters],tx_kesearch_pi1[sortByDir],tx_kesearch_pi1[sortByField],tx_kesearch_pi1[sword]</p><p><br /></p><p>Bringt vor allem auch Performance, da nicht immer wieder gecached werden muss.</p><p><br /></p><p>Die Lösung mit&nbsp;FE.cacheHash.excludedParameters funktioniert aber nur, wenn die Parameter dynamisch gemappt sind. Werden also "statische" Routen generiert, dann hilft das auch nichts und es muss der Core Hook&nbsp;$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tslib/class.tslib_fe.php']['createHashBase'] genutzt werden um die Parameter aus der Cache Hash Berechnung zu entfernen</p>

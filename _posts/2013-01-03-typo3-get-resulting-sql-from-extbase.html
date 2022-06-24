@@ -1,0 +1,16 @@
+---
+layout: post
+title: TYPO3 - get resulting SQL from Extbase query
+date: '2013-01-03T10:13:00.000+01:00'
+author: Torben Hansen
+tags:
+- TYPO3 CMS
+- Extbase
+- Debug SQL
+modified_time: '2013-01-03T10:13:32.383+01:00'
+blogger_id: tag:blogger.com,1999:blog-6517038209122183182.post-5947885197466500469
+blogger_orig_url: http://www.derhansen.de/2013/01/typo3-get-resulting-sql-from-extbase.html
+permalink: /2013/01/typo3-get-resulting-sql-from-extbase.html
+---
+
+When you develop a TYPO3 Extbase extension, you may sometimes wonder, why a query does not return the exprected results. In this situation, it would be great if you can get the <b>resultig SQL </b>from TYPO3.<br /><br />Actually, there are some solutions on the internet for this problem. Sadly, the one I found <a href="http://stackoverflow.com/questions/5075296/how-to-debug-a-query-in-extbase" target="_blank">here</a> does not work for me in TYPO3 6.0. The code snippet found <a href="http://snipplr.com/view/55225/" target="_blank">here</a> pointed me to the right direction. There is only one problem with the snippet, since it does not contain the whole SQL query (some parameters are filled with a questionmark).<br /><br />So here is hopefully a complete solution on how to output the resulting SQL from an Extbase query.<br /><br /><b>Attention:&nbsp;</b><i>The following code changes should only be done for development purposes on development systems.</i><br /><br /><ol><li>Open the file "/typo3/sysext/extbase/Classes/Persistence/Generic/Storage/Typo3DbBackend.php"</li><li>Navigate to the function "GetObjectDataByQuery()"</li><li>Go to the line next to "$this-&gt;replacePlaceholders($sql, $parameters, $tableName);"</li><li>Insert the following code&nbsp;</li></ol><pre><code><br />var_dump($sql);<br /></code></pre><div><br /></div>This should output the resulting SQL query. Please notice, that this change can result in more than just one SQL query output, since now every query processed by Extbase is printed out.<br /><br />If anyone has another solution for this problem, feel free to drop me a message.<br /><br />Happy debugging :-)<br /><br /><br />

@@ -1,0 +1,20 @@
+---
+layout: post
+title: Using FAL media in TYPO3 6.0 for inline CSS header images
+date: '2013-02-23T11:03:00.001+01:00'
+author: Torben Hansen
+tags:
+- TYPO3 6.0
+- levelmedia
+- slide
+- FAL
+- resource
+- header image
+modified_time: '2013-02-23T11:03:43.784+01:00'
+thumbnail: http://1.bp.blogspot.com/-HoNXOvLNIq8/USiSzaMVJrI/AAAAAAAAEY4/eYFsP5e9Ivc/s72-c/media-relation.png
+blogger_id: tag:blogger.com,1999:blog-6517038209122183182.post-5449927948903819708
+blogger_orig_url: http://www.derhansen.de/2013/02/using-fal-media-in-typo3-60-for-inline.html
+permalink: /2013/02/using-fal-media-in-typo3-60-for-inline.html
+---
+
+Last year I wrote an <a href="http://www.derhansen.de/2012/09/kopfgrafik-als-resource-per-inline-css.html" target="_blank">article</a> about how to use a page resources to create an "sliding" header-image, which is included by inline CSS.<br /><br />In TYPO3 6.0 the FAL (File Abstraction Layer) was introduced, which changes a lot of things regarding file handling. The technique&nbsp;I described in the article mentioned before does not work with TYPO3 6.0, since page resources now are handled by FAL.<br /><br />In this article I will describe how to create a sliding header-image in TYPO3 6.0 using FAL and the resources of a page.<br /><br />First you should upload an image which should be uses as the header image. Just upload it somewhere in fileadmin.<br /><br />Next you select the page, where the header image should be shown. Create a new relation to the formerly uploaded file.<br /><br /><div class="separator" style="clear: both; text-align: center;"><a href="http://1.bp.blogspot.com/-HoNXOvLNIq8/USiSzaMVJrI/AAAAAAAAEY4/eYFsP5e9Ivc/s1600/media-relation.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="202" src="http://1.bp.blogspot.com/-HoNXOvLNIq8/USiSzaMVJrI/AAAAAAAAEY4/eYFsP5e9Ivc/s400/media-relation.png" width="400" /></a></div><br /><br />Now you must add the following TS snippet to your TypoScript template<br /><pre><code><br />page.cssInline {<br />  10 = FILES<br />  10 { <br />     references.data =  levelmedia:-1, slide<br />     references.listNum = 0<br />     renderObj = TEXT<br />     renderObj.data = file:current:publicUrl<br />     renderObj.wrap (<br />      .header {<br />        background-image: url(../|);  <br />      }<br />    ) <br />  }  <br />}<br /></code></pre><br />Please notice, that the snippet above just is an example which uses the first file (listNum = 0) from the resources of the page.<br /><br />The result is a new inline CSS stylesheet in the frontend of your website, where the formerly uploaded image is used as a background-image for the class "header". Below is the content of the CSS file.<br /><pre><code><br />.header {<br />        background-image: url(../fileadmin/images/typo3-logo.png);  <br />      }<br /></code></pre>

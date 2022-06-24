@@ -1,0 +1,16 @@
+---
+layout: post
+title: Logwatch filter for ModSecurity 2
+date: '2013-01-03T12:27:00.000+01:00'
+author: Torben Hansen
+tags:
+- ModSecurity 2
+- logfile analysis
+- Logwatch
+modified_time: '2013-01-03T12:27:23.115+01:00'
+blogger_id: tag:blogger.com,1999:blog-6517038209122183182.post-8140918101657614139
+blogger_orig_url: http://www.derhansen.de/2013/01/logwatch-filter-for-modsecurity-2.html
+permalink: /2013/01/logwatch-filter-for-modsecurity-2.html
+---
+
+I often use <b>ModSecurity 2</b> and the <b>OWASP ModSecurity Core Rule Set (CRS)</b> to protect a website from potential attacks. ModSecurity 2 is able to write blocked attacks to a <b>audit logfile</b>, so you actually can see, which Core Rule and which data matched the attack that has been blocked. The logfile can also help you to <i>analyze false positives</i>, so you can modify the CRS to your needs.<br /><br />As a server admin, you regulary should check the logfiles of your server. One tool to help you analyzing your server´s logfiles is <a href="http://sourceforge.net/projects/logwatch/" target="_blank">Logwatch</a>, which can send reports by e-mail with a summary of the logfile analysis.&nbsp;Sadly Logwatch was´nt able to analyze ModSecurity 2 audit logfiles and I could´nt find a filter for Logwatch, which fullfilled my needs.<br /><br />So I wrote a filter for <b>Logwatch</b>, which analyzes a <b>ModSecurity 2 audit logfile</b> for blocked attacks and collects those information for a given time period as a report. The report is seperated by vhost, so you can have a quick overview on which attacks have been blocked on which vhost. Also the reports contains a top 10 summary of blocked IP addresses.<br /><br />Here is a sample output from the filter:<br /><pre style="font-size: 10px;">--------------------- ModSecurity2 (mod_security2) Begin ------------------------<br /><br />ATTACKS BLOCKED ON VHOSTS:<br /><br />subdomain.domain.tld - 2 time(s)<br />[ip: xxx.xxx.xxx.xxx] [id: 981231 ] [msg: SQL Comment Sequence Detected.]  - 1 time(s)<br />[ip: xxx.xxx.xxx.xxx] [id: 981231 ] [msg: SQL Comment Sequence Detected.]  - 1 time(s)<br /><br />www.site.tld - 1 time(s)<br />[ip: xxx.xxx.xxx.xxx] [id: 990012 ] [msg: Rogue web site crawler]  - 1 time(s)<br />[ip: xxx.xxx.xxx.xx] [id: 981318 ] [msg: SQL Injection Attack: Common Injection Testing Detected]  - 5 time(s)<br />[ip: xxx.xxx.xxx.xx] [id: 950901 ] [msg: SQL Injection Attack: SQL Tautology Detected.]  - 2 time(s)<br /><br />www.anothersite.tld - 1 time(s)<br />[ip: xxx.xxx.xxx.xxx] [id: 958291 ] [msg: Range: field exists and begins with 0.]  - 1 time(s)<br /><br />TOP 10 BLOCKED IPS:<br />xxx.xxx.xxx.xxx - 2 time(s)<br />xx.xxx.xxx.xxx - 1 time(s)<br />xxx.xxx.xx.xx - 1 time(s)<br />xxx.xxx.xxx.xx - 1 time(s)<br />xxx.xxx.xxx.xxx - 1 time(s)<br /><br />---------------------- ModSecurity2 (mod_security2) End -------------------------<br /></pre><br />The filter has been tested with ModSecurity 2 version 2.6.0 (CRS 2.2.0) and version 2.7.1 (CRS 2.2.6)<br /><br />I published the <a href="https://github.com/derhansen/logwatch-modsec2" target="_blank">Logwatch filter for Mod Security 2</a> on Github, so feel free to submit change requests or bug reports.<br /><br />
