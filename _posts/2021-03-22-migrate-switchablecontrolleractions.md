@@ -34,9 +34,9 @@ one plugin, that has 3 switchableControllerActions.
 
 Source: [Flexform for Pi1](https://github.com/derhansen/plain_faq/blob/2.x/Configuration/FlexForms/Pi1.xml#L15)
 
-*   Faq->list;Faq->detail
-*   Faq->list
-*   Faq->detail
+*   `Faq->list;Faq->detail`
+*   `Faq->list`
+*   `Faq->detail`
 
 For all 3 switchableControllerActions, I created 3 individual plugins _(Pilistdetail, Pilist, Pidetail)_ which handle
 the action(s) of each switchable controller action from the list above.
