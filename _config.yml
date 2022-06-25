@@ -1,17 +1,16 @@
 # Site settings
 site: derhansen.blog
 title: A TechBlog by Torben Hansen
-keywords: derhansen, blog
+keywords: derhansen, blog, typo3
 description: >-
   A TechBlog by Torben Hansen
 lang: en-US
 timezone:  Europe/Berlin
-google_verify: xxx
 
 # Author settings
 author:
   name: Torben Hansen
-  bio: Freelance Web Developer located in northern Germany. <br> I create web applications mainly using TYPO3, PHP, Python and JavaScript.
+  bio: Freelance Full Stack Web Developer located in Germany. <br> I create web applications mainly using TYPO3, PHP, Python and JavaScript.
   picture: assets/images/profile.jpg 
   email: torben@derhansen.com
 
