@@ -8,18 +8,21 @@ tags:
 - spam
 - typo3
 - ext:form
-modified_time: '2022-07-16T19:20:00.005+02:00'
+modified_time: '2022-07-19T12:57:33.005+02:00'
 permalink: /2022/07/restricting-automated-spam-submissions-in-web-forms.html
 ---
+
+TD;DR - Use JavaScript to calculate the value of a hidden field which is evaluated on form
+submission. [See example](/2022/07/restricting-automated-spam-submissions-in-web-forms.html#make-automated-form-submissions-harder-using-javascript)
 
 It can be frustrating when spambots automatically submit forms on a website you run. Many years ago, when websites used
 to have guestbooks, the spambots usually added new guestbook entries containing links in order to create a huge amount
 of backlinks to questionable websites. Today, the intention of most spambots changed. Content filled out in a form (e.g.
 contact- or registration form) on a website may get *saved to a database* for further processing or may get *sent to an
 email recipient*. For contact forms, the latter is a usual procedure and one of the main advantage for spammers is, that
-those emails pass spamfilters, since the sending server is trusted by the recipients email infrastructure. Knowing this,
-spammers often just submit "regular" spam content (e.g. short text with link to a website like "Just one click and your
-money will grow. https://website.tld") through forms on websites.
+those emails usually pass spamfilters, since the sending server may be trusted by the recipients email infrastructure.
+Knowing this, spammers often just submit "regular" spam content (e.g. short text with link to a website like "Just one
+click and your money will grow. https://website.tld") through forms on websites.
 
 ### Honeypots, captchas and some other techniques
 
@@ -89,7 +92,7 @@ on [packagist](https://packagist.org/packages/derhansen/form_crshield) and
 [TER](https://extensions.typo3.org/extension/form_crshield) and which stopped automated form submissions at least 
 for the TYPO3 websites I am responsible for.
 
-The challenge/response spam protection does not require any user interaction and is pretty simple:
+The **JavaScript challenge/response spam protection** does not require any user interaction and is pretty simple:
 
 1. A hidden input field with a server side generated data-attribute (the challenge) is added to all forms
 2. The client executes the included JavaScript, which:
@@ -100,10 +103,12 @@ The challenge/response spam protection does not require any user interaction and
    if the challenge is not as expected 
 
 In order to make things harder for a spambot, the given challenge has a limited lifetime. For my TYPO3 extension 
-ext:form_crshield this lifetime is based on the TYPO3 page lifetime. 
+ext:form_crshield this lifetime is based on the TYPO3 page cache lifetime. 
 
-For my TYPO3 extension I used ROT13 for the response calculation. You can however use whatever you want for a custom 
-challenge/response form protection (e.g. browser agent string, current date, ...). 
+For my TYPO3 extension I used ROT13 for the response calculation. You can however use whatever algorithm you want 
+for a custom challenge/response form protection, It is also recommended making the challenge as variable as 
+possible (e.g. include browser agent string, current date, ...), so the challenge changes from time to time 
+and has a limited lifetime.
 
 ### Why JavaScript is not THE main solution to prevent form spam  
 
