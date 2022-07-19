@@ -106,7 +106,7 @@ In order to make things harder for a spambot, the given challenge has a limited 
 ext:form_crshield this lifetime is based on the TYPO3 page cache lifetime. 
 
 For my TYPO3 extension I used ROT13 for the response calculation. You can however use whatever algorithm you want 
-for a custom challenge/response form protection, It is also recommended making the challenge as variable as 
+for a custom challenge/response form protection. It is also recommended making the challenge as variable as 
 possible (e.g. include browser agent string, current date, ...), so the challenge changes from time to time 
 and has a limited lifetime.
 
