@@ -118,6 +118,7 @@ JavaScript will consume much more system ressources (e.g. headless browser, sele
 automation more expensive for spammers.
 
 A spammer targeting explicitly your website can of course easily use reverse engineering to extract the 
-challenge/response logic and code something that computes the required calculation in a script. But I assume, that 
-for the vast majority of the spammers out there, such an analysis and reverse engineering will be too much effort.
+challenge/response logic and code something that computes the required calculation in a script. But I assume, that for
+the vast majority of the spammers out there, such an analysis, reverse engineering and special coding requirements will
+be too much effort.
  
