@@ -26,7 +26,7 @@ extension, which shows how to extend domain models and controllers of the main e
 `config.tx_extbase.objects` can be found [here](https://github.com/derhansen/sf_event_mgt_extend_demo/tree/0.2.0). I
 migrated this demo extension to use XCLASSes instead.
 
-The code below shows, how two models and one controller are extended using XLASS
+The code below shows, how two models and one controller are extended using XCLASS. 
 
 {% highlight php %}
 // XCLASS event
@@ -34,7 +34,7 @@ $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\DERHANSEN\SfEventMgt\Domain\Model
     'className' => \DERHANSEN\SfEventMgtExtendDemo\Domain\Model\Event::class
 ];
 
-// Register extended domain class
+// Register extended domain class (TYPO3 9.5 - 11.5 only, not required for TYPO3 12)
 GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\Container\Container::class)
     ->registerImplementation(
         \DERHANSEN\SfEventMgt\Domain\Model\Event::class,
@@ -46,7 +46,7 @@ $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\DERHANSEN\SfEventMgt\Domain\Model
     'className' => \DERHANSEN\SfEventMgtExtendDemo\Domain\Model\Registration::class
 ];
 
-// Register extended registration class
+// Register extended registration class (TYPO3 9.5 - 11.5 only, not required for TYPO3 12)
 GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\Container\Container::class)
     ->registerImplementation(
         \DERHANSEN\SfEventMgt\Domain\Model\Registration::class,
@@ -59,8 +59,9 @@ $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\DERHANSEN\SfEventMgt\Controller\E
 ];
 {% endhighlight %}
 
-For domain models, the important part is the **registerImplementation()** call, since this instructs Extbase to use the
-extended domain model when an object is processed by the property mapper.
+For domain models in TYPO3 9.5 - 11.5, the important part is the **registerImplementation()** call, since this 
+instructs Extbase to use the extended domain model when an object is processed by the property mapper. For TYPO3 12
+the **registerImplementation()** call is not required any more.
 
 Note, that there are some limitations using XCLASS, so it is highly recommended to read the
 official [documentation](https://docs.typo3.org/typo3cms/CoreApiReference/ApiOverview/Xclasses/Index.html).
