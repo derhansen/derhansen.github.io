@@ -1,6 +1,6 @@
 ---
 layout: post
-title: All extbase plugins not working after update to TYPO3 11.5
+title: Problem with all extbase plugins during TYPO3 11.5 update
 date: '2022-10-09T14:34:00.005+02:00'
 author: Torben Hansen
 tags:
@@ -8,12 +8,12 @@ tags:
 - plugin
 - extbase
 - configurePlugin
-modified_time: '2022-10-09T14:34:00.005+02:00'
-permalink: /2022/10/all-extbase-plugins-not-working-after-typo3-11-update.html
+modified_time: '2022-10-10T07:20:00.005+02:00'
+permalink: /2022/10/problem-with-all-extbase-plugins-during-typo3-11-update.html
 ---
 
 In a TYPO3 project, where I was updating the website from TYPO3 10.4 to version 11.5, I suddenly faced the situation,
-that every extbase plugin did not work anymore. The following error message was displayed (example for TYPO3 ext:news):
+that **all extbase plugins** did not work anymore. The following error message was displayed (example for TYPO3 ext:news):
 
 ```
 The default controller for extension "News" and plugin "Pi1" can not be determined.
