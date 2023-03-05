@@ -10,11 +10,14 @@ tags:
 - model
 - extend
 - Extbase
-modified_time: '2019-03-18T15:33:47.755+01:00'
+modified_time: '2023-03-05T18:34:00.755+01:00'
 blogger_id: tag:blogger.com,1999:blog-6517038209122183182.post-6111849216340821268
 blogger_orig_url: http://www.derhansen.de/2019/03/extending-extbase-domain-models-and.html
 permalink: /2019/03/extending-extbase-domain-models-and.html
 ---
+
+**TL;DR** - In **TYPO3 12+**, use XCLASS to extend existing extbase domain models and controllers. For **TYPO3 9.5 - 11.5** 
+use XCLASS and `registerImplementation()` as shown below.
 
 In TYPO3 9.5 LTS it has been
 deprecated ([see notice](https://docs.typo3.org/typo3cms/extensions/core/Changelog/9.5/Deprecation-86270-ExtbaseXclassViaTypoScriptSettings.html))
