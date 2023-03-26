@@ -33,3 +33,6 @@ The solution for this problem was easy. I just disabled the table wizard using a
 ```
 unset($GLOBALS['TCA']['tt_content']['types']['table']['columnsOverrides']);
 ```
+
+This disables the TYPO3 table wizard for the table content element and my client could again easily copy and paste
+CSV data into the `bodytext` field.
