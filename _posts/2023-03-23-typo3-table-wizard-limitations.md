@@ -7,7 +7,7 @@ tags:
 - TYPO3
 - table wizard
 - performance
-modified_time: '2023-03-23T18:16:00.000+02:00'
+modified_time: '2023-03-30T11:18:00.000+02:00'
 permalink: /2023/03/2023-03-26-typo3-table-wizard-limitations.html
 ---
 
@@ -22,11 +22,12 @@ as shown on the screenshot below.
 
 My client however used to copy data from a CSV file and paste it to the `bodytext` field of the table content element.
 Usually, the pasted CSV consisted of **several thousand lines** of data, so the TYPO3 table wizard had to render many 
-thousands of input fields in the table wizard, which was **really slow**. But that was not the only limitation I had to 
+thousands of input fields in the table wizard, which was **really slow**. ~~But that was not the only limitation I had to 
 deal with, since the data was not saved to the TYPO3 database. I quickly realized, that the PHP variable 
 `max_input_vars` was causing this problem, since it was set to `1500` - the minimal recommended value if you use TYPO3.
 Since the table wizard created many thousand input fields for the huge tables, PHP refused to accept all data in the 
-POST request, which resulted in the described problem that not all data was saved.
+POST request, which resulted in the described problem that not all data was saved.~~ Update 30.03.2023 - the problem
+with the `max_input_vars` has been [fixed](https://forge.typo3.org/issues/100354) in TYPO3 11.5 and 12.
 
 The solution for this problem was easy. I just disabled the table wizard using a TCA override as shown below:
 
