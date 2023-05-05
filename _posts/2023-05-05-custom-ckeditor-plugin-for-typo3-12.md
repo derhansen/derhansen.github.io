@@ -120,7 +120,7 @@ CKEditor plugin is referenced.
 ### 3. Extend TYPO3 CKEditor configuration
 
 Finally the TYPO3 CKEditor configuration needs to be extended, so the new plugin is registered using `importModules` 
-and the plugin button is added to the `toobar` items. The following extract from the CKEditor configuration
+and the plugin button is added to the `toolbar` items. The following extract from the CKEditor configuration
 shows the important parts.
 
 ```
