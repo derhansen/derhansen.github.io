@@ -43,7 +43,7 @@ copied from `ext:rte_ckeditor/Configuration/RTE/Default.yaml`.
 
 ### 1. Create the CKEditor 5 plugin
 
-The TYPO3 [documentation](docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/12.0/Breaking-96874-CKEditor-relatedPluginsAndConfiguration.html)
+The TYPO3 [documentation](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/12.0/Breaking-96874-CKEditor-relatedPluginsAndConfiguration.html)
 contains an example for a custom timestamp plugin. It is important to know, that the shown code is TypeScript
 (e.g `readonly` attribute for `pluginName` constant or `: void` as return type for the `init()` function). The code
 will not directly run as CKEditor 5 plugin and either needs to be **compiled** or **adapted**. For simplicity
