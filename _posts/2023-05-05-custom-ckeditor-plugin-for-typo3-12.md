@@ -123,7 +123,7 @@ Finally the TYPO3 CKEditor configuration needs to be extended, so the new plugin
 and the plugin button is added to the `toolbar` items. The following extract from the CKEditor configuration
 shows the important parts.
 
-```
+{% highlight yaml %}
 editor:
   config:
     importModules:
@@ -159,7 +159,7 @@ editor:
         - sourceEditing
         - '|'
         - timestamp
-```
+{% endhighlight %}
 
 ### 4. Using the plugin
 
