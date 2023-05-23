@@ -15,8 +15,8 @@ My [t3versions](https://www.t3versions.com) TYPO3 version analysis and statistic
 During the years, I had to learn, that crawling and analyzing most likely the whole WWW for TYPO3 websites is sometimes 
 challenging. 
 
-In order to find new websites using TYPO3, I regulary perform a **crawling** process, which checks over 260 million 
-domains for possible TYPO3 usage. With my current infrastructure (3 servers with 6 CPUs each), this task takes about 
+In order to find new websites using TYPO3, I regulary perform a **crawling** process, which checks over **260 million 
+domains** for possible TYPO3 usage. With my current infrastructure (3 servers with 6 CPUs each), this task takes about 
 14 days to analyze all domains. The crawling process checks the content of a website for TYPO3 fingerprints. When a 
 TYPO3 website has been identified, the domain is queued for a detailed analysis using the t3versions API. The 
 crawling process runs multicore and multithreaded and consumes **~4TB of traffic**. It is not uncommon, that some 
