@@ -42,7 +42,7 @@ In order to avoid being blocked by WAFs (too quickly), I optimized the TYPO3 ana
 * Added a small wait time (random value < 1 second) between fingerprinting requests
 * Centralize the GET request logic for all analysis tasks, so it is possible to use proxy servers
 * Ensure that GET requests for a website analysis does not always come from the same IP address by using random proxy servers
-* Use a pool of private squid proxy servers when rescanning known TYPO3 websites. Costs are quite low (~1€ per rescan)
+* Use a pool of private squid proxy servers when rescanning known TYPO3 websites. Costs are quite low (~1€ for the squid servers per rescan)
 
 I am very satisfied with the results of my optimizations, as they have led to a significant decrease in the number 
 of false positives (website being removed from the database allthough it uses TYPO3). Through constant efforts and 
