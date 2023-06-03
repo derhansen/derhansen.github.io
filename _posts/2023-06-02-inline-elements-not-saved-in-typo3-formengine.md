@@ -8,7 +8,7 @@ tags:
 - formengine
 - custom element
 modified_time: '2023-06-03T09:24:00.000+02:00'
-permalink: /2023/05/invalid-custom-formengine-element-causing-persistence-issue-in-typo3-backend.html
+permalink: /2023/06/invalid-custom-formengine-element-causing-persistence-issue-in-typo3-backend.html
 ---
 
 **TL;DR:** Always make sure, that a custom TYPO3 formengine element returns _valid HTML_ in `$resultArray['html']`
