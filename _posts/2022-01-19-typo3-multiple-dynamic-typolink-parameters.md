@@ -7,7 +7,7 @@ tags:
 - userfunc
 - TYPO3
 - typolink
-modified_time: '2022-01-20T15:29:42.284+01:00'
+modified_time: '2023-07-05T22:40:00.000+01:00'
 blogger_id: tag:blogger.com,1999:blog-6517038209122183182.post-6637893069431677698
 blogger_orig_url: http://www.derhansen.de/2022/01/typo3-multiple-dynamic-typolink-parameters.html
 permalink: /2022/01/typo3-multiple-dynamic-typolink-parameters.html
@@ -57,7 +57,7 @@ config {
         registration {
             typolink {
                 parameter = 1
-                userFunc = DERHANSEN\SfEventMgt\UserFunc\TypoLink-&gt;createEventLink
+                userFunc = DERHANSEN\SfEventMgt\UserFunc\TypoLink->createEventLink
                 userFunc {
                     eventUid = TEXT
                     eventUid.data = field:event
@@ -85,7 +85,16 @@ class TypoLink
 {
     private const EVENT_DETAILPID = 22;
 
-    public ContentObjectRenderer $cObj;
+    // TYPO3 < 12.4
+    //public $cObj;
+
+    // TYPO3 12.4+ only
+    protected $cObj;
+
+    public function setContentObjectRenderer(ContentObjectRenderer $cObj): void
+    {
+        $this->cObj = $cObj;
+    }
 
     public function createEventLink(array $content, array $config): string
     {
