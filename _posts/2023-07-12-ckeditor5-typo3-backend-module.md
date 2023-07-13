@@ -35,13 +35,8 @@ as shown below:
 <?php
 
 return [
-    'dependencies' => ['backend'],
-    'tags' => [
-        'backend.form',
-    ],
+    'dependencies' => ['backend', 'rte_ckeditor'],
     'imports' => [
-        '@typo3/rte-ckeditor/' => 'EXT:rte_ckeditor/Resources/Public/JavaScript/',
-        '@typo3/ckeditor5-bundle.js' => 'EXT:rte_ckeditor/Resources/Public/Contrib/ckeditor5-bundle.js',
         '@mynamespace/my-extension-key/' => 'EXT:my_extension-key/Resources/Public/JavaScript/Backend/',
     ],
 ];
