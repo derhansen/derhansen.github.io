@@ -8,7 +8,7 @@ tags:
 - backend module
 - ckeditor
 modified_time: '2023-07-13T08:12:00.000+02:00'
-permalink: /2023/07/2023-07-13-ckeditor-4-and-5-typo3-backend-module.html
+permalink: /2023/07/ckeditor-4-and-5-typo3-backend-module.html
 ---
 
 In TYPO3 backend modules, it can be useful to provide a CKEditor instance, for example when creating 
