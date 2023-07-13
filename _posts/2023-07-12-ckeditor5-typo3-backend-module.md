@@ -42,6 +42,8 @@ return [
 ];
 {% endhighlight %}
 
+By adding a dependency to `rte_ckeditor`, the CKEditor 5 dependencies are automatically imported.
+
 Next, a custom ES6 module with a very basic CKEditor 5 configuration is added to 
 `Resources/Public/JavaScript/Backend/my-module.js` as shown below:
 
