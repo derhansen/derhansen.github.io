@@ -1,6 +1,6 @@
 ---
 layout: post
-title: How to use CKEditor 4 and 5 in a TYPO3 backend module
+title: How to use CKEditor in a TYPO3 backend module
 date: '2023-07-13T08:12:00.000+02:00'
 author: Torben Hansen
 tags:
@@ -8,7 +8,7 @@ tags:
 - backend module
 - ckeditor
 modified_time: '2023-07-13T08:12:00.000+02:00'
-permalink: /2023/07/ckeditor-4-and-5-typo3-backend-module.html
+permalink: /2023/07/ckeditor-typo3-backend-module.html
 ---
 
 In TYPO3 backend modules, it can be useful to provide a CKEditor instance, for example when creating 
@@ -20,8 +20,8 @@ where the editor requires more flexibility for email notifications sent through 
 extension.  
 
 Adding a CKEditor instance to a TYPO3 backend module is however different depending on which TYPO3 
-version is used. The examples below show, how this works with TYPO3 12.4 and CKEditor 5 and with 
-TYPO3 <= 11.5 and CKEditor 4.
+version is used. The examples below show, how this works with **TYPO3 12.4 and CKEditor 5** and with 
+**TYPO3 <= 11.5 and CKEditor 4**.
 
 ### Adding a CKEditor 5 instance to a textfield
 
