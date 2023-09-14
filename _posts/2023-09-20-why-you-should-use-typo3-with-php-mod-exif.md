@@ -87,3 +87,6 @@ smaller size, which then results in the distorted image effect as shown initiall
 
 If you use original images created by digital cameras in TYPO3, you should always ensure, that the PHP module exif is 
 installed and active, so the exif `Orientation` property is respected. 
+
+For the rescue, most webhosters and also linux distributions (e.g. Ubuntu 22.04) already have PHP exif module 
+enabled by default. 
