@@ -9,7 +9,7 @@ tags:
 - distorted image
 - exif
 modified_time: '2023-09-15T10:10:00.000+02:00'
-permalink: /2023/09/the-significance-of-the-php-exif-module-in-typo3-why-you-should-always-use-it.html
+permalink: /2023/09/the-significance-of-the-php-exif-module-in-typo3-why-it-should-always-be-enabled.html
 ---
 
 **TL;DR:** If using original portrait images created with modern camera systems, you should ensure that 
