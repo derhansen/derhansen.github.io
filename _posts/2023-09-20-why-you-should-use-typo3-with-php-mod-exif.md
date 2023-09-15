@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 'The significance of the PHP exif module in TYPO3 and why you should always enable it'
+title: 'The significance of the PHP exif module in TYPO3 and why it should always be enabled'
 date: '2023-09-14T15:00:00.000+02:00'
 author: Torben Hansen
 tags:
