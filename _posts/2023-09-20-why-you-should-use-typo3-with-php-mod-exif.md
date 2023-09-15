@@ -89,4 +89,9 @@ If you use original images created by digital cameras in TYPO3, you should alway
 installed and active, so the exif `Orientation` property is respected. 
 
 For the rescue, most webhosters and also linux distributions (e.g. Ubuntu 22.04) already have PHP exif module 
-enabled by default. 
+enabled by default.
+
+**Update 15.09.2023 12:10:00**
+
+I created this [this](https://review.typo3.org/c/Packages/TYPO3.CMS/+/81022){:target="_blank"} TYPO3 core patch, which
+(if merged) will ensure, that the PHP exif module will be recommended when installing TYPO3.  
