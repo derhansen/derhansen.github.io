@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 'The significance of the PHP exif module in TYPO3: Why you should always enable it'
+title: 'The significance of the PHP exif module in TYPO3 and why you should always enable it'
 date: '2023-09-14T15:00:00.000+02:00'
 author: Torben Hansen
 tags:
@@ -8,7 +8,7 @@ tags:
 - image processing 
 - distorted image
 - exif
-modified_time: '2023-09-14T15:00:00.000+02:00'
+modified_time: '2023-09-15T10:10:00.000+02:00'
 permalink: /2023/09/the-significance-of-the-php-exif-module-in-typo3-why-you-should-always-use-it.html
 ---
 
