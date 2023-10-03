@@ -19,11 +19,11 @@ processing larger amount of records.
 
 I was recently involved in refactoring an older codebase in a TYPO3 project. One part of that codebase was a 
 data import which was created using a Symfony console command. The command basically fetched data from an 
-external data source and imported/updated existing records in the TYPO3 database. While executing the command,
-During execution, I noticed that it was quite slow. What's more, it appeared that the routine slowed down as 
-more records were processed, indicating a bottleneck in the code. After some investigation, it became evident 
-that the slow performance was caused by the TYPO3 `QueryBuilder`, which was instantiated globally in the Symfony 
-command and then reused in several functions.
+external data source and imported/updated existing records in the TYPO3 database. During execution, I noticed 
+that it was quite slow. What's more, it appeared that the routine slowed down as more records were processed, 
+indicating a bottleneck in the code. After some investigation, it became evident that the slow performance was 
+caused by the TYPO3 `QueryBuilder`, which was instantiated globally in the Symfony command and then reused in 
+several functions.
 
 The TYPO3 documentation advises against reusing the `QueryBuilder`, emphasizing that it holds an internal state.
 
