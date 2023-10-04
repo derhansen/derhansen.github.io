@@ -33,6 +33,9 @@ The notice does however not describe the _consequences_ of reusing a `QueryBuild
 a significant performance decreasement in the code I was working on, I was curious and digged deeper into the 
 topic to analyze, why `QueryBuilder` slowed down so much when reused for multiple queries.
 
+_Update 04.10.2023:_ Note, that the shown notice on the screenshot above already has been updated in the
+TYPO3 documentation.
+
 ### Performance analysis
 
 To highlight the performance decrease, I created a simple Symfony command that:
