@@ -9,7 +9,7 @@ tags:
 - slow
 - xdebug
 - profiling
-modified_time: '2023-10-03T13:45:00.000+02:00'
+modified_time: '2023-10-04T07:38:00.000+02:00'
 permalink: /2023/10/the-pitfalls-of-reusing-typo3-querybuilder-analyzing-a-performance-bottleneck.html
 ---
 
@@ -115,3 +115,6 @@ becomes slower due to the overhead of parsing and processing a large number of p
 As a result of the analysis, I think it may be good to change the notice in the documentation to a warning 
 and outline, that you **must never** reuse an instance of the `QueryBuilder`.
 
+_Update 04.10.2023:_ Thanks a lot to the TYPO3 documentation team, who already updated 
+the `QueryBuilder` [documentation](https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/ApiOverview/Database/QueryBuilder/Index.html#instantiation) 
+as suggested!
