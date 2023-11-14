@@ -52,7 +52,8 @@ reasons, the code in this example is just adapted as shown below.
 The file `Resources/Public/JavaScript/Ckeditor/timestamp-plugin.js` contains the following ES6 JavaScript code.
 
 {% highlight javascript %}
-import {Core, UI} from '@typo3/ckeditor5-bundle.js';
+import * as Core from '@ckeditor/ckeditor5-core';
+import * as UI from '@ckeditor/ckeditor5-ui';
 
 export default class Timestamp extends Core.Plugin {
   static pluginName = 'Timestamp';
