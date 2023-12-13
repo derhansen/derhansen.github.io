@@ -27,7 +27,7 @@ page.20 {
 This will result in TYPO3 throwing an exception, since the called `captureException` function expects
 arguments, which are not provided. So far, so good. But what, if Sentry does not recieve the expected event?
 
-### Creating a test event in Sentry using curl
+### Creating a test event in Sentry using cURL
 
 To ensure the server's ability to connect to Sentry and generate test events, the versatile cURL command can 
 be employed as a valuable tool. cURL facilitates the simulation of HTTP requests, making it an effective means 
