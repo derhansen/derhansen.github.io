@@ -243,3 +243,5 @@ pre{font-size: 14px; max-width: 90vw; overflow: auto;}
 .mode.active:after {content: "🌛";transform: translateX(20px);}
 .mode.active span {transform: translateX(0);}
 .mode span {position: absolute;z-index: 1;margin: 2px;display: block;width: 18px;height: 18px;background: white;border-radius: 50%;box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);transform: translateX(20px);transition: all 0.4s ease;}
+
+strong { font-weight: bold}
