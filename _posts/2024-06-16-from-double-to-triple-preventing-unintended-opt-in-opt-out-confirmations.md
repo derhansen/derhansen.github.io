@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 'Why you should consider using tripple opt-in / opt-out'
+title: 'From double to tripple: Preventing unintended opt-in / opt-out confirmations'
 date: '2024-06-16T13:10:00.000+02:00'
 author: Torben Hansen
 tags:
@@ -10,8 +10,8 @@ tags:
 - tripple opt-in
 - tripple opt-out
 - email security
-modified_time: '2024-06-16T13:10:00.000+02:00'
-permalink: /2024/06/2024-06-16-why-you-should-consider-using-tripple-opt-in-out.html
+modified_time: '2024-06-16T18:19:00.000+02:00'
+permalink: /2024/06/2024-06-16-from-double-to-triple-preventing-unintended-opt-in-opt-out-confirmations.html
 ---
 
 Today, double opt-in is the de facto standard for web services that require user subscriptions. This process is 
