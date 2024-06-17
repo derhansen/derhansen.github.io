@@ -53,12 +53,12 @@ confirmation link or completing a confirmation form, which is displayed after th
 link in the email. This step requires a manual action from the user, ensuring the intent of the action is deliberate 
 and authentic.
 
-In version 7.5.0 of my TYPO3 extension sf_event_mgt, I have implemented a tripple opt-in process for event 
+In version 7.5.0 of my TYPO3 extension sf_event_mgt, I have implemented a **tripple opt-in process** for event 
 registration and a tripple opt-out process for event cancellation. This feature can be optionally activated via 
 TypoScript configuration.
 
 The tripple opt-in process ensures that users confirm their registration through three distinct steps, enhancing 
 the security and validity of the registration. Similarly, the tripple opt-in process requires users to confirm 
-their cancellation through three steps, preventing accidental unsubscribes and ensuring that cancellations are 
-intentional. This additional layer of verification helps avoid issues caused by automatic link clicks from email 
-security gateways, enhancing user experience and reducing support requests.
+their cancellation through three steps, preventing unintended cancellations. This additional layer of verification 
+helps avoid issues caused by automatic link clicks from email security gateways, enhancing user experience and 
+reducing support requests.
