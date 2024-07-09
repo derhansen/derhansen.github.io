@@ -7,7 +7,7 @@ tags:
 - typo3
 - backend module
 - ckeditor
-modified_time: '2023-07-13T08:12:00.000+02:00'
+modified_time: '2024-07-09T15:44:00.000+02:00'
 permalink: /2023/07/ckeditor-typo3-backend-module.html
 ---
 
@@ -48,21 +48,34 @@ Next, a custom ES6 module with a very basic CKEditor 5 configuration is added to
 `Resources/Public/JavaScript/Backend/my-module.js` as shown below:
 
 {% highlight php %}
-import { CKEditor5 } from '@typo3/ckeditor5-bundle.js';
+import { ClassicEditor } from '@ckeditor/ckeditor5-editor-classic';
+import { Essentials } from '@ckeditor/ckeditor5-essentials';
+import { Bold, Italic } from '@ckeditor/ckeditor5-basic-styles';
+import { List } from '@ckeditor/ckeditor5-list';
+import { Link } from '@ckeditor/ckeditor5-link';
+import { Paragraph } from '@ckeditor/ckeditor5-paragraph';
+import { SourceEditing } from '@ckeditor/ckeditor5-source-editing';
 
-class NotificationModule {
-    constructor() {
-        let target = document.getElementById('myTextfieldId');
-
-        const config = {
-            toolbar: [ 'bold', 'italic', '|', 'bulletedList', 'numberedList', '|', 'sourceEditing', '|', 'link' ],
-        }
-
-        CKEditor5.create(target, config);
+class MyModule {
+  constructor() {
+    let target = document.getElementById('myTextfieldId');
+    const config = {
+      toolbar: [ 'bold', 'italic', '|', 'bulletedList', 'numberedList', '|', 'link', '|', 'sourceEditing' ],
     }
+    ClassicEditor.builtinPlugins = [
+      Essentials,
+      Bold,
+      Italic,
+      List,
+      Link,
+      Paragraph,
+      SourceEditing
+    ];
+    ClassicEditor.create(target, config);
+  }
 }
 
-export default new NotificationModule();
+export default new MyModule;
 {% endhighlight %}
 
 Finally, the module needs to be loaded for the backend view, where the textfield is present. This can either 
