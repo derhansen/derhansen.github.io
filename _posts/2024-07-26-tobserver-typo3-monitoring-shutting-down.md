@@ -14,7 +14,7 @@ permalink: /2024/07/tobserver-typo3-monitoring-service-shutdown.html
 
 ### The evolution of tObserver 
 
-Back in 2015 I was working for a company who provided TYPO3 website development and hosting. We had to manage 
+Back in 2015 I was working for a company which provided TYPO3 website development and hosting. We had to manage 
 hundreds of TYPO3 websites and with each TYPO3 core or extension security update, we had to identify, which of our 
 managed TYPO3 websites did use the affected TYPO3 core version or extension, so we could install the security 
 updates. This demand led to the idea of tObserver.
