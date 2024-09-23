@@ -246,3 +246,17 @@ pre{font-size: 14px; max-width: 90vw; overflow: auto;}
 .mode span {position: absolute;z-index: 1;margin: 2px;display: block;width: 18px;height: 18px;background: white;border-radius: 50%;box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);transform: translateX(20px);transition: all 0.4s ease;}
 
 strong { font-weight: bold}
+
+.alert-warning {
+  padding: 1em;
+  border: 1px solid;
+}
+
+.alert-warning h3 {
+    margin-top: 0;
+    text-align: center;
+}
+
+pre.highlight {
+  padding: 0.8em;
+}
