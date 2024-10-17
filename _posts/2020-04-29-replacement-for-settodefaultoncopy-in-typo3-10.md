@@ -8,11 +8,18 @@ tags:
 - TYPO3
 - TCA
 - setToDefaultOnCopy
-modified_time: '2020-04-29T20:15:42.332+02:00'
+modified_time: '2024-10-17T09:38:00.332+02:00'
 blogger_id: tag:blogger.com,1999:blog-6517038209122183182.post-6277615038991766885
 blogger_orig_url: http://www.derhansen.de/2020/04/replacement-for-settodefaultoncopy-in-typo3-10.html
 permalink: /2020/04/replacement-for-settodefaultoncopy-in-typo3-10.html
 ---
+
+<div class="alert-warning">
+<strong>⚠️ Update 17.10.2024:</strong> With TYPO3 v13 and the TCA Schema, the following "hack" is not 
+possible anymore, since TCA is readonly for the required DataHandler operations. A possible workaround is to mark 
+non deleted inline subrecords as deleted in `processCmdmap_preProcess` and to revert the process in 
+`processCmdmap_postProcess`. This will requires an extra field in the database table.
+</div>
 
 The TYPO3 TCA Option "setToDefaultOnCopy" has been [removed](https://forge.typo3.org/issues/87989) in TYPO3 10 in order
 to reduce the amount of checks in DataHandler and the amount of available options in TCA. The documentation says,
