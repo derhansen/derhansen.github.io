@@ -9,12 +9,19 @@ tags:
 - disable
 - cache
 - development
-modified_time: '2019-08-25T19:22:56.474+02:00'
+modified_time: '2024-10-17T15:47:00.474+02:00'
 thumbnail: https://1.bp.blogspot.com/-WsS2GuNrkyM/XWAktySEtEI/AAAAAAAAhNY/2DsjokFgW94GKihzfvarCMVA9WtIN2LeQCLcBGAs/s72-c/typo3-cache.png
 blogger_id: tag:blogger.com,1999:blog-6517038209122183182.post-1356148107491560920
 blogger_orig_url: http://www.derhansen.de/2019/08/how-to-disable-typo3-nginx-fastcgi-cache-in-development.html
 permalink: /2019/08/how-to-disable-typo3-nginx-fastcgi-cache-in-development.html
 ---
+
+<div class="alert-warning">
+<strong>⚠️ Update 17.10.2024:</strong> With TYPO3 v13 the `$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tslib/class.tslib_fe.php']['pageLoadedFromCache']`
+hook has been removed and the shown solution does not work anymore. Instead I suggest to configure the local webserver
+to return a 200 response on PURGE request (e.g. by using a rewrite rule) in order to prevent an exception being 
+thrown.
+</div>
 
 When you run TYPO3 on nginx webservers, you can use the nginx FastCGI cache to really increase the performance of your
 website. Basically, the nginx FastCGI cache stores pages rendered by TYPO3 in the webservers memory. So once a page is
