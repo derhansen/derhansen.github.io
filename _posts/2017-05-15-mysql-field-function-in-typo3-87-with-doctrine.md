@@ -14,6 +14,11 @@ blogger_orig_url: http://www.derhansen.de/2017/05/mysql-field-function-in-typo3-
 permalink: /2017/05/mysql-field-function-in-typo3-87-with-doctrine.html
 ---
 
+<div class="alert-warning">
+<strong>⚠️ Update 31.12.2024:</strong> With TYPO3 v13, the shown solution is not possible anymore. For TYPO3 13.4+,
+make sure to apply the solution I described in <a href="https://www.derhansen.de/2024/12/sorting-by-uids-with-mysql-field-function-in-typo3-13-4-using-doctrine-dbal-4.html">this</a> blogpost.
+</div> 
+
 When you want to query an Extbase repository for a list of UIDs or PIDs, you usually add a query constraint like **
 query->in('pid', $pidList)** to the query, where $pidList is an array of integers. But what, if you want to control the
 sorting of the returned records? Lets assume, you want to select the following list of UIDs **\[5, 3, 4, 1\]** from your
