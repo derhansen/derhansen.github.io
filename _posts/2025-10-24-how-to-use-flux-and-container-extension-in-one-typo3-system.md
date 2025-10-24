@@ -22,7 +22,7 @@ content elements, [content_blocks](https://extensions.typo3.org/extension/conten
 
 ## Why use flux and container extension in one TYPO3 system?
 
-In longterm running **multi-site TYPO3 systems**, it is not unusual to encounter different technological approaches
+In longterm running **multi-site TYPO3 systems**, it may be required to use different technological approaches
 across individual sites. Some sites may rely on **flux**, while newer ones might use **container**. However, using both
 extensions within the same TYPO3 system is not possible out of the box, as they both override the `itemsProcFunc`
 for the `colPos` field of the `tt_content` table. This usually results in problems when adding new content elements
