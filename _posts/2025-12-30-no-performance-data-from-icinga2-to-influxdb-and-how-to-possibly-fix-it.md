@@ -1,13 +1,13 @@
 ---
 layout: post
-title: 'No performance data to InfluxDB from Icinga 2 and how to possibly fix it'
+title: 'No performance data from Icinga 2 to InfluxDB and how to possibly fix it'
 date: '2025-12-30T13:43.000+02:00'
 author: Torben Hansen
 tags:
 - Icinga 2
 - performance data
 modified_time: '2025-12-30T13:43.000+02:00'
-permalink: /2025/12/no-performance-data-to-influxdb-from-icinga2-and-how-to-possibly-fix-it.html
+permalink: /2025/12/no-performance-data-from-icinga2-to-influxdb-and-how-to-possibly-fix-it.html
 ---
 
 **TL;DR:** In Icinga Web 2, navigate to **Toggle Menu > Health**, click on the **Icinga DB Instance**, and ensure that 
