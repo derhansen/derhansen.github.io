@@ -101,6 +101,9 @@ Finally, enabling the performance data feature solved the problem for me, and no
 
 ![Icinga Example Grafana Graph](/assets/images/2025-12-30/icinga-performance-graph.png)
 
+I still have no idea why the performance data feature was disabled in the first place and guess it somehow might
+have been related with a regular Icinga 2 upgrade.
+
 ## Learnings
 
 All in all, it took me more than 8 hours to resolve the problem. It was an interesting experience with 
