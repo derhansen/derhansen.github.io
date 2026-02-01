@@ -13,7 +13,7 @@ modified_time: '2026-02-01T12:40.000+02:00'
 permalink: /2026/01/how-not-to-use-t3versions.html
 ---
 
-## TL;DR: Don't Scrape—Use the API
+## TL;DR: Don't Scrape - Use the API
 
 Instead of building a bot to execute **t3versions** domain checks via a headless browser, just request an API key and 
 use it. It’s faster, more reliable, and won’t get you banned.
